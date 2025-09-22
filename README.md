@@ -1,35 +1,33 @@
-# CapstoneProjectTemplate /* Replace this line with the title of your project */
+# Pollinator Habitat
 
 ## **Summary**
 
-Put a very high-level summary of the project.
+This accessible app will lead Connor Prairie guests to discover the diversity of pollinators and the types of plants they pollinate. 
 
 ## **Team Members**
 
-- Joe Black
-- Joe Pesci
-- Joe Dalton
+- Camden Hovell
+- Campbell Reed
+- C.J. Fulciniti
+- Evan Kiser
+- Logan Greer
 
 ## **Client Partner Information**
 
 ### *Company:*
-WHATEVER COMPANY or CORRESPONDENCE
+Connor Prairie
 
 ### *People:*
-- Jane Fonda
-- Jane Lynch
+- Ronda Hamm
 
 ## **Links**
 
 - [Project description](ProjectDescription.md)
 - [Team meeting minutes](MeetingMinutes/Team)
-- [Mentor meeting minutes](MeetingMinutes/Mentor)
 - [Client partner meeting minutes](MeetingMinutes/ClientPartner)
-- ... any other documents/links you see need
 
 ## **Code Repositories**
 
-- [Mobile App - Android](https://www.github.com/WHEREEVER_THE_ANDROID_CODE_IS/)
-- [Php Backend](https://www.github.com/WHEREEVER_THE_PHP_CODE_IS)
-- Others if more.
+- [Example: Mobile App - Android](https://www.github.com/WHEREEVER_THE_ANDROID_CODE_IS/)
+- [Example: Php Backend](https://www.github.com/WHEREEVER_THE_PHP_CODE_IS)
 
