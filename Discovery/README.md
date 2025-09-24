@@ -17,8 +17,8 @@ Evan:
 
 The meeting was recorded and uploaded on YouTube [here](https://youtu.be/JM1kIsERxTE). Select screenshots are included: 
 
-![Meeting Screenshot 1](http://url/to/img.png)
-![Meeting Screenshot 2](http://url/to/img.png)
+![Meeting Screenshot 1](https://github.com/CamComDuck/pollinator-habitat/blob/master/Discovery/Meeting_Pictures/meeting_screenshot1.png)
+![Meeting Screenshot 2](https://github.com/CamComDuck/pollinator-habitat/blob/master/Discovery/Meeting_Pictures/meeting_screenshot2.png)
 
 After our meeting with Ronda, she sent several documents providing detail about the requirements.
 
