@@ -15,10 +15,10 @@ Evan:
     -Evan_Disc_Meeting_Notes_1
     -Evan_Disc_Meeting_Notes_2
 
-The meeting was recorded. Select screenshots are included: 
+The meeting was recorded and uploaded on YouTube [here](https://youtu.be/JM1kIsERxTE). Select screenshots are included: 
 
-{SSfileName1}:{Screenshots from meeting1}
-{SSfileName2}:{Screenshots from meeting2}
+![Meeting Screenshot 1](http://url/to/img.png)
+![Meeting Screenshot 2](http://url/to/img.png)
 
 After our meeting with Ronda, she sent several documents providing detail about the requirements.
 
