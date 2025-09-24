@@ -1,37 +1,35 @@
 # Discovery
 
-Discovery Meeting Notes and Summary: 
+- Discovery Meeting Notes and Summary: 
    -2025-09-23.md: Initial meeting with Ronda and Conner Prarie. 
 
-Notes taken from discovery meeting were digitized. Included in folder: Discovery_Meeting_Notes
-Written by:
+- Notes taken from discovery meeting were digitized. Included in folder Discovery_Meeting_Notes, Written by:
 
-Campbell:
-    -Campbell_Disc_Meeting_Notes_1
-    -Campbell_Disc_Meeting_Notes_2
-CJ:
-    -CJ_Disc_Meeting_Notes
-Evan:
-    -Evan_Disc_Meeting_Notes_1
-    -Evan_Disc_Meeting_Notes_2
+ - Campbell:
+     - Campbell_Disc_Meeting_Notes_1
+     - Campbell_Disc_Meeting_Notes_2
+ - CJ:
+     - CJ_Disc_Meeting_Notes
+ - Evan:
+     - Evan_Disc_Meeting_Notes_1
+     - Evan_Disc_Meeting_Notes_2
 
-The meeting was recorded and uploaded on YouTube [here](https://youtu.be/JM1kIsERxTE). Select screenshots are included: 
+- The meeting was recorded and uploaded on YouTube [here](https://youtu.be/JM1kIsERxTE). Select screenshots are included: 
 
 ![Meeting Screenshot 1](https://github.com/CamComDuck/pollinator-habitat/blob/master/Discovery/Meeting_Pictures/meeting_screenshot1.png)
 ![Meeting Screenshot 2](https://github.com/CamComDuck/pollinator-habitat/blob/master/Discovery/Meeting_Pictures/meeting_screenshot2.png)
 
-After our meeting with Ronda, she sent several documents providing detail about the requirements.
+- After our meeting with Ronda, she sent several documents providing detail about the requirements.
 
-By Folder: 
-    -Graphics
+- By Folder: 
+    - Graphics
         - 2 different Conner Prarie graphics
             1. CP_Wordmark Stacked_RGB-01
             2. CP_Wordmark Horiz_CMYK-01
-        -A brand standard guide, that also has good info on Conner Prarie in general
-            -
+        - A brand standard guide, that also has good info on Conner Prarie in general
 
-    -Pollinator_Garden
-        -PDF docs that provide are the backbone of the application. 
+    - Pollinator_Garden
+        - PDF docs that provide are the backbone of the application. 
             1. Pollinator Dichotomous Key Activity Directions
                 -In depth explanation of the activities function and set up structure
                 -Will provide information on how to design the "flow of interaction".
