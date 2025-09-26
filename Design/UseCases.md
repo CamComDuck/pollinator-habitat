@@ -2,11 +2,11 @@
 
 - **Children**: Young users who interact with the game through the web application for educational or entertainment purposes. They represent the primary users who will be playing the game and navigating through various paths within the game.
 
-- **Adults**: Adult users who play the game through the web application, potentially including parents, educators, or general users. They have the same interaction capabilities as children, but may be running the application for a group of children.
+- **Adults**: Adult users who play the game through the web application, potentially including parents, educators, or general users. They might be more knowledgeable than the children who will be playing the game. They have the same interaction capabilities as children, but may be running the application for a group of children. They are expected to have a 
 
-- **Disabled Children**: Young users with various disabilities who require accessible gaming features and accommodations. The system must provide inclusive design elements to ensure equal access to gaming functionality.
+- **Disabled Children**: Young users who suffer from being colorblind, deaf, or blind who require accessible gaming features and accommodations. The system must provide inclusive design elements to ensure equal access to gaming functionality.
 
-- **Disabled Adults**: Adult users with disabilities who require accessible gaming features and accommodations. The system should accommodate various disability types.
+- **Disabled Adults**: Adult users who suffer from being colorblind, deaf, or blind who require accessible gaming features and accommodations. The system should accommodate various disability types.
 
 - **Administrator**: Internal system users with the highest level of privileges who manage the overall system configuration, user permissions, and system maintenance. They have full access to all administrative functions and can modify system-wide settings.
 
@@ -17,7 +17,7 @@
 ## Use Cases
 
 - **UC1: Playing the Game**
-  - **Explanation**: This is the core functionality of the project where users interact with the game through the web application. Players navigate through different paths and engage with the content, learning about various pollinators.
+  - **Explanation**: This is the core functionality of the project where external users interact with the game through the web application. Players navigate through different paths and engage with the content, learning about various pollinators.
   - **Actors**: Children, Adults, Disabled Children, and Disabled Adults
   - **Flow**:
     1. User accesses the game through a QR code that brings them to the web application
@@ -26,13 +26,14 @@
     4. The user will start the game
     6. Users follow a path, given randomly by the system
     7. A progress bar will show them how far into the path they are
-    8. The system will record the path they are on, how many people are in their group, how long they spent on it, etc
+    8. The system will collect statistics
     9. The system records completion when the user completes the path
-    10. The user will be returned to the starting screen, where they can repeat the game
+    10. The user will be able to read facts about the pollinators that the paths lead them to
+    11. The user will be returned to the starting screen, where they can repeat the game
   - **Connected to**: BR1
 
-- **UC2: Getting Statistics from the Backend About Games Played**
-  - **Explanation**: This use case enables the business analysts to monitor system usage, user engagement, and game performance through the system-collected analytics. The data will be used for business decision-making, identifying usage patterns, getting grants, and measuring the success of the game through the web application.
+- **UC2: Analyzing Statistics from the Backend About Games Played**
+  - **Explanation**: This use case enables the business analysts to monitor system usage, user engagement, and game performance through the system-collected analytics. The data will be used for business decision-making, identifying usage patterns, getting grants, enhancing the game, and measuring the success of the game through the web application.
   - **Actors**: Business Analyst
   - **Flow**:
     1. Internal user accesses the administrative portal
@@ -46,18 +47,19 @@
   - **Connected to**: BR2
 
 - **UC3: Temporarily Enabling/Disabling Path Options for Current Game Session**
-  - **Explanation**: This use case provides optional flexibility by allowing activity leads to dynamically control which game paths are available during specific sessions. This functionality is important for managing special events, testing new features, or accommodating specific group needs without making permanent system changes.
+  - **Explanation**: This use case provides optional flexibility by allowing activity leads to dynamically control which game paths are available during specific sessions. This functionality is important for managing special events, testing new features, or accommodating specific group needs without making permanent system changes. Paths may be closed for maintenance, construction, or other real-world problems. 
   - **Actors**: Activity Lead 
   - **Flow**:
     1. Activity Lead accesses the session management interface
     2. System displays current session status and available paths
     3. User starts a new game session or selects an existing active session
-    4. User selects specific paths to disable for the current session
-    5. System temporarily removes selected paths from the player interface
-    6. User can re-enable paths during the session as needed
-    7. System maintains all paths enabled by default
-    8. User stops the session when activities are complete
-    9. System restores all paths to the default enabled state
+    4. The activity Lead gives the players in the group a code to join a specific session.
+    5. User selects specific paths to disable for the current session
+    6. System temporarily removes selected paths from the player interface
+    7. User can re-enable paths during the session as needed
+    8. System maintains all paths enabled by default
+    9. User stops the session when activities are complete
+    10. System restores all paths to the default enabled state
   - **Connected to**: BR2
 
 - **UC4: Permanent Removal/Addition/Editing of Paths for All Future Sessions**
@@ -76,7 +78,7 @@
   - **Connected to**: BR2
 
 - **UC5: Adding, Removing, Viewing Permissions of All Internal Users**
-  - **Explanation**: This use case manages user access control and security by allowing administrators to control who has access to various system functions. It's critical for maintaining system security, ensuring appropriate access levels, and managing the internal user base. Proper permission management protects sensitive data and maintains operational integrity.
+  - **Explanation**: This use case manages user access control and security by allowing administrators to control who has access to various system functions. It's critical for maintaining system security, ensuring appropriate access levels, and managing the internal user base. Proper permission management protects sensitive data and maintains operational integrity. Activity leads could be temporary hires, who will only need access to specific abilities for a certain time. The Administrator would be able to give them the access they need to do their job, and remove it when they are no longer needed to work. 
   - **Actors**: Administrator
   - **Flow**:
     1. Administrator accesses the user management interface
