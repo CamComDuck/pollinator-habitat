@@ -2,7 +2,7 @@
 
 - **Children**: Young users who interact with the game through the web application for educational or entertainment purposes. They represent the primary users who will be playing the game and navigating through various paths within the game.
 
-- **Adults**: Adult users who play the game through the web application, potentially including parents, educators, or general users. They might be more knowledgeable than the children who will be playing the game. They have the same interaction capabilities as children, but may be running the application for a group of children. They are expected to have a 
+- **Adults**: Adult users who play the game through the web application, potentially including parents, educators, or general users. They might be more knowledgeable than the children who will be playing the game. They have the same interaction capabilities as children, but may be running the application for a group of children.
 
 - **Disabled Children**: Young users who suffer from being colorblind, deaf, or blind who require accessible gaming features and accommodations. The system must provide inclusive design elements to ensure equal access to gaming functionality.
 
