@@ -2,19 +2,16 @@
 title: Pollinator Habitat Project
 ---
 classDiagram
-
     class Node{
         -nodeId: int
         -nodeInfo: String
         -endOfRoute: bool
-        +connectedNodes: List<Node>
         +getNodeInfo(nodeId): String
     }
     class FinalNode{
         -nodeId: int
         -nodeInfo: String
         -endOfRoute: bool
-        +connectedNodes: List<Node>
         -pollinatorFacts: String
         +getFactSheet(nodeId): String
     }
@@ -26,10 +23,10 @@ classDiagram
      class Player{
         -playerId: int 
         +routesCompleted: List<Route>
-        +advance(nodeId) : Node
-        +finishRoute(routeId) : void
-        +quickRestart(visitId, routesCompleted) : Node
-        +setAccessibilityFeatures() : void
+        +advance(nodeId): Node
+        +finishRoute(routeId): void
+        +quickRestart(visitId, routesCompleted): Node
+        +setAccessibilityFeatures(): void
     }
     class Session{
         -sessionId: int
@@ -37,7 +34,7 @@ classDiagram
         -routes: List<Route>
     }
 
-Node --> Node : player moves from
+Player --> FinalNode : get pollinator information from 
 Route o-- Node : connects
 Player --> Route : follows
 FinalNode --|> Node : is a
