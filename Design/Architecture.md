@@ -1,7 +1,7 @@
-# Architecture Overview
+# Architecture Overview #
 This document serves as a critical, living template designed to equip agents with a rapid and comprehensive understanding of the codebase's architecture, enabling efficient navigation and effective contribution from day one. Update this document as the codebase evolves.
 
-## 1. Project Structure
+## 1. Project Structure ##
 This section provides a high-level overview of the project's directory and file structure, categorised by architectural layer or major functional area. It is essential for quickly navigating the codebase, locating relevant files, and understanding the overall organization and separation of concerns.
 
 
@@ -37,7 +37,7 @@ This section provides a high-level overview of the project's directory and file 
 
 
 
-## 2. High-Level System Diagram
+## 2. High-Level System Diagram ##
 Provide a simple block diagram (e.g., a C4 Model Level 1: System Context diagram, or a basic component diagram) or a clear text-based description of the major components and their interactions. Focus on how data flows, services communicate, and key architectural boundaries.
  
 [User] <--> [Frontend Application] <--> [Backend Service 1] <--> [Database 1]
