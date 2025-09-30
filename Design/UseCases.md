@@ -8,7 +8,7 @@
 
 - **Disabled Adults**: Adult users who suffer from being colorblind, deaf, or blind who require accessible gaming features and accommodations. The system should accommodate various disability types.
 
-- **Administrator**: Internal system users with the highest level of privileges who manage the overall system configuration, user permissions, and system maintenance. They have full access to all administrative functions and can modify system-wide settings.
+- **System Administrator**: Internal system users with the highest level of privileges who manage the overall system configuration, user permissions, and system maintenance. They have full access to all administrative functions and can modify system-wide settings.
 
 - **Activity Lead**: Internal users responsible for managing game sessions and path configurations during active gameplay periods. They have operational control over temporary game settings and can enable/disable paths for specific sessions.
 
@@ -17,19 +17,18 @@
 ## Use Cases
 
 - **UC1: Playing the Game**
-  - **Explanation**: This is the core functionality of the project where external users interact with the game through the web application. Players navigate through different paths and engage with the content, learning about various pollinators.
+  - **Explanation**: This is the core functionality of the project where external users interact with the game through the web application. Players navigate through different paths and engage with the content, learning about various pollinators. The system will track which paths they have done and give them a new path they have not done before in a single game session.
   - **Actors**: Children, Adults, Disabled Children, and Disabled Adults
   - **Flow**:
     1. User accesses the game through a QR code that brings them to the web application
     2. The system displays available game paths and a menu for the accessibility settings
     3. The user can select paths they want enabled/disabled, change accessibility settings, or press start to put them on a randomized path
     4. The user will start the game
-    6. Users follow a path, given randomly by the system
-    7. A progress bar will show them how far into the path they are
-    8. The system will collect statistics
-    9. The system records completion when the user completes the path
-    10. The user will be able to read facts about the pollinators that the paths lead them to
-    11. The user will be returned to the starting screen, where they can repeat the game
+    5. Users follow a path, given randomly by the system
+    6. The system will collect statistics
+    7. The system records completion when the user completes the path
+    8. The user will be able to read facts about the pollinators that the paths lead them to
+    9. The user will be returned to the starting screen, where they can repeat the game
   - **Connected to**: BR1
 
 - **UC2: Analyzing Statistics from the Backend About Games Played**
@@ -64,7 +63,7 @@
 
 - **UC4: Permanent Removal/Addition/Editing of Paths for All Future Sessions**
   - **Explanation**: This use case enables administrators to make changes to the game structure by permanently modifying available paths. This functionality is essential for system maintenance, content updates, and long-term game evolution. It allows the platform to grow and adapt while maintaining consistency across all future gaming sessions.
-  - **Actors**: Administrator
+  - **Actors**: System Administrator
   - **Flow**:
     1. Administrator accesses the admin dashboard interface
     2. System displays all current paths with editing options
@@ -72,14 +71,15 @@
     4. For adding: Administrator defines new path parameters and content
     5. For removing: Administrator confirms permanent deletion of selected paths
     6. For editing: Administrator modifies existing path properties and content
-    7. System validates changes and updates the path configuration
-    8. System applies changes to all future gaming sessions
-    9. Administrator confirms successful implementation
+    7. System Admin will hit an approve button that will tell the system to update the changes.
+    8. System validates changes and updates the path configuration
+    9. System applies changes to all future gaming sessions
+    10. Administrator confirms successful implementation
   - **Connected to**: BR2
 
 - **UC5: Adding, Removing, Viewing Permissions of All Internal Users**
-  - **Explanation**: This use case manages user access control and security by allowing administrators to control who has access to various system functions. It's critical for maintaining system security, ensuring appropriate access levels, and managing the internal user base. Proper permission management protects sensitive data and maintains operational integrity. Activity leads could be temporary hires, who will only need access to specific abilities for a certain time. The Administrator would be able to give them the access they need to do their job, and remove it when they are no longer needed to work. 
-  - **Actors**: Administrator
+  - **Explanation**: This use case manages user access control and security by allowing administrators to control who has access to various system functions. It's critical for maintaining system security, ensuring appropriate access levels, and managing the internal user base. Proper permission management protects sensitive data and maintains operational integrity. Activity leads could be temporary hires who will only need access to specific abilities for a certain time. The Administrator would be able to give them the access they need to do their job, and remove it when they are no longer needed to work. 
+  - **Actors**: System Administrator
   - **Flow**:
     1. Administrator accesses the user management interface
     2. System displays a list of all internal users with current permission levels
