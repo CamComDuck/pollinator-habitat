@@ -38,7 +38,7 @@ This section provides a high-level overview of the project's directory and file 
 ├── .gitignore            # Specifies intentionally untracked files to ignore
 ├── README.md             # Project overview and quick start guide
 └── ARCHITECTURE.md       # Architecture overview (this document)
-```text
+```
 
 
 ## 2. High-Level System Diagram ##
