@@ -6,34 +6,34 @@ This section provides a high-level overview of the project's directory and file 
 
 
 [Project Root]/
-├── backend/              # Contains all server-side code and APIs
-│   ├── src/              # Main source code for backend services
-│   │   ├── api/          # API endpoints and controllers
-│   │   ├── client/       # Business logic and service implementations
-│   │   ├── models/       # Database models/schemas
-│   │   └── utils/        # Backend utility functions
-│   ├── config/           # Backend configuration files
-│   ├── tests/            # Backend unit and integration tests
-│   └── Dockerfile        # Dockerfile for backend deployment
-├── frontend/             # Contains all client-side code for user interfaces
-│   ├── src/              # Main source code for frontend applications
-│   │   ├── components/   # Reusable UI components
-│   │   ├── pages/        # Application pages/views
-│   │   ├── assets/       # Images, fonts, and other static assets
-│   │   ├── services/     # Frontend services for API interaction
-│   │   └── store/        # State management (e.g., Redux, Vuex, Context API)
-│   ├── public/           # Publicly accessible assets (e.g., index.html)
-│   ├── tests/            # Frontend unit and E2E tests
-│   └── package.json      # Frontend dependencies and scripts
-├── common/               # Shared code, types, and utilities used by both frontend and backend
-│   ├── types/            # Shared TypeScript/interface definitions
-│   └── utils/            # General utility functions
-├── docs/                 # Project documentation (e.g., API docs, setup guides)
-├── scripts/              # Automation scripts (e.g., deployment, data seeding)
-├── .github/              # GitHub Actions or other CI/CD configurations
-├── .gitignore            # Specifies intentionally untracked files to ignore
-├── README.md             # Project overview and quick start guide
-└── ARCHITECTURE.md       # This document
+├── backend/              # Contains all server-side code and APIs  
+│   ├── src/              # Main source code for backend services  
+│   │   ├── api/          # API endpoints and controllers  
+│   │   ├── client/       # Business logic and service implementations  
+│   │   ├── models/       # Database models/schemas  
+│   │   └── utils/        # Backend utility functions  
+│   ├── config/           # Backend configuration files  
+│   ├── tests/            # Backend unit and integration tests  
+│   └── Dockerfile        # Dockerfile for backend deployment  
+├── frontend/             # Contains all client-side code for user interfaces  
+│   ├── src/              # Main source code for frontend applications  
+│   │   ├── components/   # Reusable UI components  
+│   │   ├── pages/        # Application pages/views  
+│   │   ├── assets/       # Images, fonts, and other static assets  
+│   │   ├── services/     # Frontend services for API interaction  
+│   │   └── store/        # State management (e.g., Redux, Vuex, Context API)  
+│   ├── public/           # Publicly accessible assets (e.g., index.html)  
+│   ├── tests/            # Frontend unit and E2E tests  
+│   └── package.json      # Frontend dependencies and scripts  
+├── common/               # Shared code, types, and utilities used by both frontend and backend  
+│   ├── types/            # Shared TypeScript/interface definitions  
+│   └── utils/            # General utility functions  
+├── docs/                 # Project documentation (e.g., API docs, setup guides)  
+├── scripts/              # Automation scripts (e.g., deployment, data seeding)  
+├── .github/              # GitHub Actions or other CI/CD configurations  
+├── .gitignore            # Specifies intentionally untracked files to ignore  
+├── README.md             # Project overview and quick start guide  
+└── ARCHITECTURE.md       # This document  
 
 
 
