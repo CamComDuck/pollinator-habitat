@@ -9,7 +9,7 @@ This section provides a high-level overview of the project's directory and file 
 ├── backend/              # Contains all server-side code and APIs  
 │   ├── src/              # Main source code for backend services  
 │   │   ├── api/          # API endpoints and controllers  
-│   │   ├── client/       # Business logic and service implementations  
+│   │   ├── services/     # Business logic and service implementations  
 │   │   ├── models/       # Database models/schemas  
 │   │   └── utils/        # Backend utility functions  
 │   ├── config/           # Backend configuration files  
@@ -30,10 +30,11 @@ This section provides a high-level overview of the project's directory and file 
 │   └── utils/            # General utility functions  
 ├── docs/                 # Project documentation (e.g., API docs, setup guides)  
 ├── scripts/              # Automation scripts (e.g., deployment, data seeding)  
+├── infra/                # Infrastructure as code (Terraform, Helm, etc.)  
 ├── .github/              # GitHub Actions or other CI/CD configurations  
 ├── .gitignore            # Specifies intentionally untracked files to ignore  
 ├── README.md             # Project overview and quick start guide  
-└── ARCHITECTURE.md       # This document  
+└── ARCHITECTURE.md       # Architecture overview (this document)  
 
 
 
