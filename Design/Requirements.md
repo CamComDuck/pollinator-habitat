@@ -99,6 +99,8 @@
  - The game should be accessible to players with autism [Low] [NFR8]
  - The game should be accessible to players with mobility limitations [Low] [NFR9]
  - The game should be accessible to deaf and hard of hearing players [Low] [NFR10]
+ - The game should be accessible to players of any phone type [Low] [NFR11]
+ - The game should be accessible to players of any screen size/resolution [Low] [NFR12]
 
 ### UC3: Temporarily Enabling/Disabling Path Options for Current Game Session
- - The games paths should all be enabled by default [Medium] [NFR11]
+ - The games paths should all be enabled by default [Medium] [NFR13]
