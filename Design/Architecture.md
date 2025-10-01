@@ -52,7 +52,7 @@ User → Frontend: sessionIdCode, player actions
 
 Frontend → Backend: cardId, game state
 Frontend → Backend: StatsUser,statsPassword
-Backend → DB: pollinator facts, statistics, admin credentials
+Backend → DB: pollinator facts, statistics, admin credentials  
 Backend → Frontend: pollinator facts, statistics
 
 
