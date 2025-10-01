@@ -61,7 +61,7 @@ Backend → Frontend: pollinator facts, statistics
 
 ### 3.1. Frontend ###
 
-Name: [Polinattor Habitat Webapp game]
+Name: [Polinator Habitat Webapp game]
 
 Description: The Front End will allow the players to play the Pollinator Habitat game as well as have a route for Admins to be able to download the game statistics and it will allow team leads to create sessions of the game and generate QR codes for the players to join with. 
 
@@ -124,11 +124,11 @@ Key Services Used: [Static Website,Mysql Database,Node.js instance]
 
 CI/CD Pipeline: [GitHub Actions]
 
-Monitoring & Logging: [e.g., Prometheus, Grafana, CloudWatch, Stackdriver, ELK Stack]
+Monitoring & Logging: [None at this point]
 
 ## 7. Security Considerations
 
-(Highlight any critical security aspects, authentication mechanisms, or data encryption practices.)
+
 
 Authentication: [JWT]
 
@@ -148,11 +148,7 @@ Code Quality Tools: [ESLint]
 
 ## 9. Future Considerations / Roadmap
 
-(Briefly note any known architectural debts, planned major changes, or significant future features that might impact the architecture.)
-
-[e.g., "Migrate from monolith to microservices."]
-
-[e.g., "Implement event-driven architecture for real-time updates."]
+More Assessability features and different langauges. 
 
 ## 10. Project Identification
 
