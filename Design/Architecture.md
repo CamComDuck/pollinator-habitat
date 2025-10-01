@@ -88,7 +88,6 @@ Deployment: [TBD]
 
 ## 4. Data Stores
 
-(List and describe the databases and other persistent storage solutions used.)
 
 ### 4.1. [Data Store Type 1]
 
@@ -96,17 +95,9 @@ Name: [Game database]
 
 Type: [MySql Relational Database]
 
-Purpose: [To store card data for the users and game stats]
+Purpose: [To store card data for the users and game stats as well as account management]
 
-Key Schemas/Collections: [Pollinator,pollinator facts,Pollinator questions,Statistics]
-
-### 4.2. [Data Store Type 2]
-
-Name: [Acount managemnt for admin users and stats]
-
-Type: [MySql]
-
-Purpose: [To manage Admin types accounts]
+Key Schemas/Collections: [Pollinator,pollinator facts,Pollinator questions,Statistics,Accounts,Permissions]
 
 ## 5. External Integrations / APIs
 
