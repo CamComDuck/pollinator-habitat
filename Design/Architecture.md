@@ -2,7 +2,8 @@
 This document serves as a critical, living template designed to equip agents with a rapid and comprehensive understanding of the codebase's architecture, enabling efficient navigation and effective contribution from day one. Update this document as the codebase evolves.
 
 ## 1. Project Structure ##
-This section provides a high-level overview of the project's directory and file structure, categorised by architectural layer or major functional area. It is essential for quickly navigating the codebase, locating relevant files, and understanding the overall organization and separation of concerns.
+The Pollinator Habitat project will be using a Monolith architecture to keep hosting costs low and keep the project structure simple. This project has four folders under the root one 
+for the Front End and one for the Back end code and a folder for documentation and a folder for scripts that will hold database seeds and other needed scripts and files. 
 
 
 ## Project Structure
@@ -17,7 +18,7 @@ This section provides a high-level overview of the project's directory and file 
 │   │   └── utils/        # Backend utility functions
 │   ├── config/           # Backend configuration files
 │   ├── tests/            # Backend unit and integration tests
-│   └── Dockerfile        # Dockerfile for backend deployment
+│   
 ├── frontend/             # Contains all client-side code for user interfaces
 │   ├── src/              # Main source code for frontend applications
 │   │   ├── components/   # Reusable UI components
@@ -28,16 +29,16 @@ This section provides a high-level overview of the project's directory and file 
 │   ├── public/           # Publicly accessible assets (e.g., index.html)
 │   ├── tests/            # Frontend unit and E2E tests
 │   └── package.json      # Frontend dependencies and scripts
-├── common/               # Shared code, types, and utilities used by both frontend and backend
-│   ├── types/            # Shared TypeScript/interface definitions
-│   └── utils/            # General utility functions
+|
+│   
+│   
 ├── docs/                 # Project documentation (e.g., API docs, setup guides)
 ├── scripts/              # Automation scripts (e.g., deployment, data seeding)
-├── infra/                # Infrastructure as code (Terraform, Helm, etc.)
+|
 ├── .github/              # GitHub Actions or other CI/CD configurations
 ├── .gitignore            # Specifies intentionally untracked files to ignore
 ├── README.md             # Project overview and quick start guide
-└── ARCHITECTURE.md       # Architecture overview (this document)
+|
 ```
 
 
@@ -45,45 +46,45 @@ This section provides a high-level overview of the project's directory and file 
 Provide a simple block diagram (e.g., a C4 Model Level 1: System Context diagram, or a basic component diagram) or a clear text-based description of the major components and their interactions. Focus on how data flows, services communicate, and key architectural boundaries.
  
 [User] <--> [Frontend Application] <--> [Backend Service 1] <--> [Database 1]
-                                    |
-                                    +--> [Backend Service 2] <--> [External API]                           
+[Administrator] <--> [Frontend Application] <--> [Backend Service 2] <--> [Database 2]    
+    
 
-## 3. Core Components
-(List and briefly describe the main components of the system. For each, include its primary responsibility and key technologies used.)
+## 3. Core Components ##
 
-### 3.1. Frontend
 
-Name: [e.g., Web App, Mobile App]
+### 3.1. Frontend ###
 
-Description: Briefly describe its primary purpose, key functionalities, and how users or other systems interact with it. E.g., 'The main user interface for interacting with the system, allowing users to manage their profiles, view data dashboards, and initiate workflows.'
+Name: [Polinattor Habitat Webapp game]
 
-Technologies: [e.g., React, Next.js, Vue.js, Swift/Kotlin, HTML/CSS/JS]
+Description: The Front End will allow the players to play the Pollinator Habitat game as well as have a route for Admins to be able to download the game statistics and it will allow team leads to create sessions of the game and generate QR codes for the players to join with. 
 
-Deployment: [e.g., Vercel, Netlify, S3/CloudFront]
+Technologies: [React and Next.js]
+
+Deployment: [TBD] Client is unsure. 
 
 ### 3.2. Backend Services
 
-(Repeat for each significant backend service. Add more as needed.)
+
 
 #### 3.2.1. [Service Name 1]
 
-Name: [e.g., User Management Service, Data Processing API]
+Name: [Pollinator Habitat Card generator]
 
-Description: [Briefly describe its purpose, e.g., "Handles user authentication and profile management."]
+Description: [Generate random cards for users and feed card data from database to the user]
 
-Technologies: [e.g., Node.js (Express), Python (Django/Flask), Java (Spring Boot), Go]
+Technologies: [Node.js,Express js,Typescript,Prisma]
 
-Deployment: [e.g., AWS EC2, Kubernetes, Serverless (Lambda/Cloud Functions)]
+Deployment: [(TBD)]
 
 #### 3.2.2. [Service Name 2]
 
-Name: [e.g., Analytics Service, Notification Service]
+Name: [Create Sessions]
 
-Description: [Briefly describe its purpose.]
+Description: [Create sessions and generate qr codes for the users to play]
 
-Technologies: [e.g., Python, Kafka, Redis]
+Technologies: [Typescript,prisma,node.js(Express)]
 
-Deployment: [e.g., AWS ECS, Google Cloud Run]
+Deployment: [TBD]
 
 ## 4. Data Stores
 
@@ -91,39 +92,39 @@ Deployment: [e.g., AWS ECS, Google Cloud Run]
 
 ### 4.1. [Data Store Type 1]
 
-Name: [e.g., Primary User Database, Analytics Data Warehouse]
+Name: [Game database]
 
-Type: [e.g., PostgreSQL, MongoDB, Redis, S3, Firestore]
+Type: [MySql Relational Database]
 
-Purpose: [Briefly describe what data it stores and why.]
+Purpose: [To store card data for the users and game stats]
 
-Key Schemas/Collections: [List important tables/collections, e.g., users, products, orders (no need for full schema, just names)]
+Key Schemas/Collections: [Pollinator,pollinator facts,Pollinator questions,Statistics]
 
 ### 4.2. [Data Store Type 2]
 
-Name: [e.g., Cache, Message Queue]
+Name: [Acount managemnt for admin users and stats]
 
-Type: [e.g., Redis, Kafka, RabbitMQ]
+Type: [MySql]
 
-Purpose: [Briefly describe its purpose, e.g., "Used for caching frequently accessed data" or "Inter-service communication."]
+Purpose: [To manage Admin types accounts]
 
 ## 5. External Integrations / APIs
 
-(List any third-party services or external APIs the system interacts with.)
 
-Service Name 1: [e.g., Stripe, SendGrid, Google Maps API]
 
-Purpose: [Briefly describe its function, e.g., "Payment processing."]
+Service Name 1: None yet
 
-Integration Method: [e.g., REST API, SDK]
+Purpose: None yet
+
+Integration Method: None yet
 
 ## 6. Deployment & Infrastructure
 
-Cloud Provider: [e.g., AWS, GCP, Azure, On-premise]
+Cloud Provider: [TBD]
 
-Key Services Used: [e.g., EC2, Lambda, S3, RDS, Kubernetes, Cloud Functions, App Engine]
+Key Services Used: [Static Website,Mysql Database,Node.js instance]
 
-CI/CD Pipeline: [e.g., GitHub Actions, GitLab CI, Jenkins, CircleCI]
+CI/CD Pipeline: [GitHub Actions]
 
 Monitoring & Logging: [e.g., Prometheus, Grafana, CloudWatch, Stackdriver, ELK Stack]
 
@@ -131,21 +132,21 @@ Monitoring & Logging: [e.g., Prometheus, Grafana, CloudWatch, Stackdriver, ELK S
 
 (Highlight any critical security aspects, authentication mechanisms, or data encryption practices.)
 
-Authentication: [e.g., OAuth2, JWT, API Keys]
+Authentication: [JWT]
 
-Authorization: [e.g., RBAC, ACLs]
+Authorization: [RBAC]
 
-Data Encryption: [e.g., TLS in transit, AES-256 at rest]
+Data Encryption: [TLS in transit]
 
-Key Security Tools/Practices: [e.g., WAF, regular security audits]
+Key Security Tools/Practices: [regular security audits]
 
 ## 8. Development & Testing Environment
 
-Local Setup Instructions: [Link to CONTRIBUTING.md or brief steps]
+Local Setup Instructions:[Setup Directions]( https://github.com/campbell-r-e/Pollinator-Habitat-main-repo/blob/main/Contributing.md )
 
-Testing Frameworks: [e.g., Jest, Pytest, JUnit]
+Testing Frameworks: [JUnit]
 
-Code Quality Tools: [e.g., ESLint, Black, SonarQube]
+Code Quality Tools: [ESLint]
 
 ## 9. Future Considerations / Roadmap
 
@@ -157,13 +158,13 @@ Code Quality Tools: [e.g., ESLint, Black, SonarQube]
 
 ## 10. Project Identification
 
-Project Name: [Insert Project Name]
+Project Name: [Pollinator Habitat]
 
-Repository URL: [Insert Repository URL]
+Repository URL: [https://github.com/campbell-r-e/Pollinator-Habitat-main-repo]
 
-Primary Contact/Team: [Insert Lead Developer/Team Name]
+Primary Contact/Team: [Camden Hovell]
 
-Date of Last Update: [YYYY-MM-DD]
+Date of Last Update: [2025-09-30]
 
 ## 11. Glossary / Acronyms
 
