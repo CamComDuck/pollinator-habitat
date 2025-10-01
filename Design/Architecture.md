@@ -47,7 +47,14 @@ Provide a simple block diagram (e.g., a C4 Model Level 1: System Context diagram
  
 [User] <--> [Frontend Application] <--> [Backend Service 1] <--> [Database 1]
 [Administrator] <--> [Frontend Application] <--> [Backend Service 2] <--> [Database 2]    
-    
+
+User → Frontend: sessionIdCode, player actions
+
+Frontend → Backend: cardId, game state
+Frontend → Backend: StatsUser,statsPassword
+Backend → DB: pollinator facts, statistics, admin credentials
+Backend → Frontend: pollinator facts, statistics
+
 
 ## 3. Core Components ##
 
@@ -135,7 +142,7 @@ Key Security Tools/Practices: [regular security audits]
 
 Local Setup Instructions:[Setup Directions]( https://github.com/campbell-r-e/Pollinator-Habitat-main-repo/blob/main/Contributing.md )
 
-Testing Frameworks: [JUnit]
+Testing Frameworks: [Jest]
 
 Code Quality Tools: [ESLint]
 
