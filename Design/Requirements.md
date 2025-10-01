@@ -1,78 +1,104 @@
-# Functional Requirements
+# Requirements
 
-#### FR1: The user shall be able to login with credentials.
-- UC1
-- HIGH
+## 1. Functional Requirements
 
-#### FR1: The user shall be given a randomly generated pollinator
-- UC1 
-- High priority 
+### UC1: Playing the Game
 
-#### FR2: The user should generate a unique pollinator each time
-- UC1
-- High priority
+#### High Priority
 
-#### FR3: The user will be able to track their progress through the game
-- UC1
-- Low priority
+- The user shall be given a randomly generated pollinator [FR1]
+- The user should generate a unique pollinator each time [FR2]
+- The user will be able to press a complete button when done with each path step [FR3]
+- The user will receive facts about the pollinator after discovering their pollinator [FR4]
 
-#### FR4: The game should be accessed using a QR code
-- UC1
-- High priority
+#### Medium Priority
 
-#### FR5: The user will be able to hit a complete button when done
-- UC1
-- Medium priority
+- The user will find the game's website using a QR code [FR4]
+- The user shall be able to join a session using a session code [FR5]
+- The user shall be able to click a back button to go to the previous path location while playing [FR6]
 
-#### FR6: The user will be given facts about the pollinator they were given
-- UC1
-- High priority
+#### Low Priority
 
-### FR7: The game should have an option to read text aloud for blind people
-- UC1
-- Medium priority
+- The game should have an option to automatically read text aloud [FR7]
+- The game should have an option to click a button to read text aloud [FR8]
+- The game should have an option to adjust text size [FR9]
+- The game should have an option to adjust the text font [FR10]
+- The game should have a high contrast colors mode [FR11]
 
-#### FR8: The game should have an option to adjust text size and front for people who need bigger font and a font more friendly to people with dyslexia
-- UC1
-- Medium priority
+### UC2: Analyzing Statistics from the Backend About Games Played
 
-#### FR9: The game should have an option to change the color used for color blind people
-- UC1
-- Medium priority
+#### High Priority
 
-#### FR10: The game should display a progress bar so the user knows how far along they are
-- UC1
-- Low priority
+- The system should allow an admin to view all statistics about game sessions previously played [FR12]
 
-#### FR11: The system should allow an admin to view that statistics about traffic going to the site
-- UC2
-- Medium priority
+#### Medium Priority
 
-#### FR12: The system should only allow website statistics to be exported as a CSV
-- UC2
-- Low priority
+- The admin should be able to filter game statistics based on user-provided filter criteria [FR13]
+- The system should allow an admin to view an average of all statistics about game sessions previously played [FR14]
+- The system should allow an admin to view graphs about game statistics [FR15]
 
-#### FR13: The instructors shall be able to start and stop access to the website
-- UC2
-- Medium priority
+#### Low Priority
 
-#### FR14: The instructors shall be able to disable and enable paths available in the game
-- UC3
-- Low priority
+- The system should allow website statistics to be exported as a CSV [FR16]
+- The system should allow website statistics to be exported as a XCEL file [FR17]
+- The system should allow website statistics to be exported as a PNG file with graphs [FR18]
 
-#### FR15: The instructors shall be to add and remove paths permanently 
-- UC4
-- Low priority
 
-#### FR16: The main system admin should be able to add and remove privileges of admins under them
-- UC5
-- High priority
+### UC3: Temporarily Enabling/Disabling Path Options for Current Game Session
 
-#### FR17: The main system admin should be able to view permissions of all users
-- UC5
-- Medium priority
+#### High Priority
+- The instructors shall be able to start a temporary session [FR19]
+- The instructors shall be able to stop a temporary session that they previously started [FR20]
 
-# Non-Functional Requirements
-#### NFR1: The games paths should all be enabled by default
-- UC3
-- High priority
+#### Medium Priority
+
+- A session code should be generated for the instructor after they start a session [FR21]
+- The instructor should be able to view their current session code [FR22]
+- The instructors shall be able to disable possible in-game paths for their currently running session [FR23]
+- The instructors shall be able to enable possible in-game paths for their currently running session [FR24]
+
+#### Low Priority
+
+- Paths that have been disabled by the instructor should not be randomly picked for players in that session [FR25]
+
+### UC4: Permanent Removal/Addition/Editing of Paths for All Future Sessions
+
+#### High Priority
+- The systems administrator shall be to add pollinator paths permanently to all future game sessions  [FR26]
+- The systems administrator shall be to remove pollinator paths permanently from all future game sessions  [FR27]
+- The systems administrator shall be to view all current possible pollinator paths in the game [FR28]
+
+#### Medium Priority
+
+- The systems administrator shall be to view all current facts about pollinators in the game [FR29]
+- The systems administrator shall be to add facts about pollinators in the game [FR30]
+- The systems administrator shall be to remove facts about pollinators in the game [FR31]
+
+
+### UC5: Adding, Removing, Viewing Permissions of All Internal Users
+
+#### High Priority
+- The systems administrator should be able to add and remove privileges of admins under them [FR32]
+- The systems administrator should be able to view permissions of all users [FR33]
+
+#### Medium Priority
+
+- The systems administrator should be able to view a log of all previous edits made by systems administrators [FR34]
+
+
+## 2. Non-Functional Requirements
+
+### UC1: Playing the Game
+ - The game should be accessible to blind and low vision players [Low] [NFR1]
+ - The game should be accessible to child players [Low] [NFR2]
+ - The game should be accessible to adult players [Low] [NFR3]
+ - The game should be accessible to elderly players [Low] [NFR4]
+ - The game should be accessible to dislexic players [Low] [NFR5]
+ - The game should be accessible to colorblind players [Low] [NFR6]
+ - The game should be accessible to deaf players [Low] [NFR7]
+ - The game should be accessible to players with autism [Low] [NFR8]
+ - The game should be accessible to players with mobility limitations [Low] [NFR9]
+ - The game should be accessible to deaf and hard of hearing players [Low] [NFR10]
+
+### UC3: Temporarily Enabling/Disabling Path Options for Current Game Session
+ - The games paths should all be enabled by default [Medium] [NFR11]

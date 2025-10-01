@@ -1,13 +1,12 @@
 # Business Requirments
-## Conner Prarie Pollinator Habitat Project
 
-### BR1
+## 1. BR1
 
 *Simplify, digitize, and improve an existing educational activity about pollinators and their habitats, serving all age ranges and accessiblity levels.* 
 
 Conner Prairie currently has an educational activity that teaches participants about different pollinators. This is currently done on paper, which requires more overhead and setup. By providing a digitized version, Conner Prairie staff will no longer have to worry about sourcing, organizing, and providing paper handouts or materials. The activity becomes more interactive in comparison to paper materials as well, with the capability of engaging new audiences. A digitized activity will provide more accessible paths to activity materials for individuals with disabilities as well as all serve all age groups and individual backgrounds, to further embody Conner Prairie's *Eye for the Future* goal of establishing an environment of diversity, equity, accessibility, and inclusivity. This application will provide the activity as a static fixture of Conner Prairie's new *Food, Farm, and Energy Experience.*
 
-### BR2
+## 2. BR2
 
 *Collect, aggregate, and provide access to data about activity use, to provide valuable insight about activity participant trends.* 
 

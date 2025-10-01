@@ -1,4 +1,4 @@
-# Architecture Overview #
+# Architecture
 This document serves as a critical, living template designed to equip agents with a rapid and comprehensive understanding of the codebase's architecture, enabling efficient navigation and effective contribution from day one. Update this document as the codebase evolves.
 
 ## 1. Project Structure ##
@@ -6,7 +6,7 @@ The Pollinator Habitat project will be using a Monolith architecture to keep hos
 for the Front End and one for the Back end code and a folder for documentation and a folder for scripts that will hold database seeds and other needed scripts and files. 
 
 
-## Project Structure
+### Project Structure
 
 ```text
 [Project Root]/
@@ -61,11 +61,11 @@ Backend → Frontend: pollinator facts, statistics
 
 ### 3.1. Frontend ###
 
-Name: [Polinator Habitat Webapp game]
+Name: Polinator Habitat Webapp game
 
 Description: The Front End will allow the players to play the Pollinator Habitat game as well as have a route for Admins to be able to download the game statistics and it will allow team leads to create sessions of the game and generate QR codes for the players to join with. 
 
-Technologies: [React and Next.js]
+Technologies: React and Next.js
 
 Deployment: [TBD] Client is unsure. 
 
@@ -73,38 +73,38 @@ Deployment: [TBD] Client is unsure.
 
 
 
-#### 3.2.1. [Service Name 1]
+#### 3.2.1. Service Name 1
 
-Name: [Pollinator Habitat Card generator]
+Name: Pollinator Habitat Card generator
 
-Description: [Generate random cards for users and feed card data from database to the user]
+Description: Generate random cards for users and feed card data from database to the user
 
-Technologies: [Node.js,Express js,Typescript,Prisma]
+Technologies: Node.js, Express JS, Typescript, Prisma
 
-Deployment: [(TBD)]
+Deployment: (TBD)
 
-#### 3.2.2. [Service Name 2]
+#### 3.2.2. Service Name 2
 
-Name: [Create Sessions]
+Name: Create Sessions
 
-Description: [Create sessions and generate qr codes for the users to play]
+Description: Create sessions and generate qr codes for the users to play
 
-Technologies: [Typescript,prisma,node.js(Express)]
+Technologies: Typescript, Prisma, node.js (Express)
 
-Deployment: [TBD]
+Deployment: TBD
 
 ## 4. Data Stores
 
 
-### 4.1. [Data Store Type 1]
+### 4.1. Data Store Type 1
 
-Name: [Game database]
+Name: Game database
 
-Type: [MySql Relational Database]
+Type: MySql Relational Database
 
-Purpose: [To store card data for the users and game stats as well as account management]
+Purpose: To store card data for the users and game stats as well as account management
 
-Key Schemas/Collections: [Pollinator,pollinator facts,Pollinator questions,Statistics,Accounts,Permissions]
+Key Schemas/Collections: Pollinator, Pollinator Facts, Pollinator Questions, Statistics, Accounts, Permission
 
 ## 5. External Integrations / APIs
 
@@ -118,33 +118,33 @@ Integration Method: None yet
 
 ## 6. Deployment & Infrastructure
 
-Cloud Provider: [TBD]
+Cloud Provider: TBD
 
-Key Services Used: [Static Website,Mysql Database,Node.js instance]
+Key Services Used: Static Website, Mysql Database, Node.js Instance
 
-CI/CD Pipeline: [GitHub Actions]
+CI/CD Pipeline: GitHub Actions
 
-Monitoring & Logging: [None at this point]
+Monitoring & Logging: None at this point
 
 ## 7. Security Considerations
 
 
 
-Authentication: [JWT]
+Authentication: JWT
 
-Authorization: [RBAC]
+Authorization: RBAC
 
-Data Encryption: [TLS in transit]
+Data Encryption: TLS in transit
 
-Key Security Tools/Practices: [regular security audits]
+Key Security Tools/Practices: regular security audits
 
 ## 8. Development & Testing Environment
 
 Local Setup Instructions:[Setup Directions]( https://github.com/campbell-r-e/Pollinator-Habitat-main-repo/blob/main/Contributing.md )
 
-Testing Frameworks: [Jest]
+Testing Frameworks: Jest
 
-Code Quality Tools: [ESLint]
+Code Quality Tools: ESLint
 
 ## 9. Future Considerations / Roadmap
 
@@ -152,18 +152,15 @@ More Assessability features and different langauges.
 
 ## 10. Project Identification
 
-Project Name: [Pollinator Habitat]
+Project Name: Pollinator Habitat
 
 Repository URL: [https://github.com/campbell-r-e/Pollinator-Habitat-main-repo]
 
-Primary Contact/Team: [Camden Hovell]
+Primary Contact/Team: Camden Hovell
 
-Date of Last Update: [2025-09-30]
+Date of Last Update: 2025-09-30
 
 ## 11. Glossary / Acronyms
 
-Define any project-specific terms or acronyms.)
+Define any project-specific terms or acronyms.
 
-[Acronym]: [Full Definition]
-
-[Term]: [Explanation]

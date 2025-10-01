@@ -1,5 +1,5 @@
 ---
-title: Pollinator Habitat Project
+title: Domain Model
 ---
 ```mermaid
 classDiagram
