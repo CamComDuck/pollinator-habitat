@@ -45,15 +45,14 @@ for the Front End and one for the Back end code and a folder for documentation a
 ## 2. High-Level System Diagram ##
 Provide a simple block diagram (e.g., a C4 Model Level 1: System Context diagram, or a basic component diagram) or a clear text-based description of the major components and their interactions. Focus on how data flows, services communicate, and key architectural boundaries.
  
-[User] <--> [Frontend Application] <--> [Backend Service 1] <--> [Database 1]
-[Administrator] <--> [Frontend Application] <--> [Backend Service 2] <--> [Database 2]    
+- [User] <--> [Frontend Application] <--> [Backend Service 1] <--> [Database 1]
+- [Administrator] <--> [Frontend Application] <--> [Backend Service 2] <--> [Database 2]    
 
-User → Frontend: sessionIdCode, player actions
-
-Frontend → Backend: cardId, game state
-Frontend → Backend: StatsUser,statsPassword
-Backend → DB: pollinator facts, statistics, admin credentials  
-Backend → Frontend: pollinator facts, statistics
+- User → Frontend: sessionIdCode, player actions
+- Frontend → Backend: cardId, game state
+- Frontend → Backend: StatsUser,statsPassword
+- Backend → DB: pollinator facts, statistics, admin credentials  
+- Backend → Frontend: pollinator facts, statistics
 
 
 ## 3. Core Components ##
@@ -61,7 +60,7 @@ Backend → Frontend: pollinator facts, statistics
 
 ### 3.1. Frontend ###
 
-Name: Polinator Habitat Webapp game
+Name: Pollinator Habitat Webapp game
 
 Description: The Front End will allow the players to play the Pollinator Habitat game as well as have a route for Admins to be able to download the game statistics and it will allow team leads to create sessions of the game and generate QR codes for the players to join with. 
 
@@ -140,7 +139,7 @@ Key Security Tools/Practices: regular security audits
 
 ## 8. Development & Testing Environment
 
-Local Setup Instructions:[Setup Directions]( https://github.com/campbell-r-e/Pollinator-Habitat-main-repo/blob/main/Contributing.md )
+Local Setup Instructions: [Setup Directions]( https://github.com/campbell-r-e/Pollinator-Habitat-main-repo/blob/main/Contributing.md )
 
 Testing Frameworks: Jest
 
@@ -148,19 +147,19 @@ Code Quality Tools: ESLint
 
 ## 9. Future Considerations / Roadmap
 
-More Assessability features and different langauges. 
+More Accessibility features and different languages. 
 
 ## 10. Project Identification
 
 Project Name: Pollinator Habitat
 
-Repository URL: [https://github.com/campbell-r-e/Pollinator-Habitat-main-repo]
+Repository URL: https://github.com/campbell-r-e/Pollinator-Habitat-main-repo
 
 Primary Contact/Team: Camden Hovell
 
-Date of Last Update: 2025-09-30
+Date of Last Update: 2025-10-01
 
 ## 11. Glossary / Acronyms
 
-Define any project-specific terms or acronyms.
+Define any project-specific terms or acronyms in the future.
 

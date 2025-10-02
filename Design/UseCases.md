@@ -46,7 +46,7 @@ Children, Adults, Disabled Children, and Disabled Adults
   9. The user will be returned to the starting screen, where they can repeat the game
 
 #### Business Requirement
-BR1: Simplify, digitize, and improve an existing educational activity about pollinators and their habitats, serving all age ranges and accessiblity levels
+BR1: Simplify, digitize, and improve an existing educational activity about pollinators and their habitats, serving all age ranges and accessibility levels
 
 ### UC2: Analyzing Statistics from the Backend About Games Played
 

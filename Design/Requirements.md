@@ -93,7 +93,7 @@
  - The game should be accessible to child players [Low] [NFR2]
  - The game should be accessible to adult players [Low] [NFR3]
  - The game should be accessible to elderly players [Low] [NFR4]
- - The game should be accessible to dislexic players [Low] [NFR5]
+ - The game should be accessible to dyslexic players [Low] [NFR5]
  - The game should be accessible to colorblind players [Low] [NFR6]
  - The game should be accessible to deaf players [Low] [NFR7]
  - The game should be accessible to players with autism [Low] [NFR8]
