@@ -279,3 +279,19 @@ docker compose -f docker-compose.dev.yml build --no-cache
 docker compose -f docker-compose.dev.yml up
 ```
  ## Testing – How to Interpret Results
+ ### Backend Tests ###
+ 
+
+ ![alt text](pics/Backendtests1.png)
+
+ ![alt text](pics/Backendtests1.png)
+
+In order to run tests with coverage you can use this command
+```
+ npm run test:coverage:backend
+```
+ From the images above we can tell that their are 16 passing tests and we can see how much of the project has test coverage. 
+ The 16 passing tests show that the API functions are all working as they should. The table shows files that need more test coverage in yellow and files with little or no coverage in red. 
+
+ 
+
