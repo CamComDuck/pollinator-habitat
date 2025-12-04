@@ -274,24 +274,25 @@ Docker lets you run the full development environment (frontend + backend +databa
 - Your local code is mounted into the containers so changes should update instantly.
 
 ### Start the Dev Environment
-```bash
-docker compose -f docker-compose.dev.yml build --no-cache
-docker compose -f docker-compose.dev.yml up
+![alt text](pics/Backendtests1.png)
+
+![alt text](pics/Backendtests1.png)
+
+In order to run tests with coverage for backend you can use this command: 
 ```
- ## Testing – How to Interpret Results
- ### Backend Tests ###
- 
-
- ![alt text](pics/Backendtests1.png)
-
- ![alt text](pics/Backendtests1.png)
-
-In order to run tests with coverage you can use this command
-```
+npm run build
  npm run test:coverage:backend
 ```
  From the images above we can tell that their are 16 passing tests and we can see how much of the project has test coverage. 
  The 16 passing tests show that the API functions are all working as they should. The table shows files that need more test coverage in yellow and files with little or no coverage in red. 
 
- 
+![alt text](pics/FrontendTestingScreenshot.png)
 
+In order to run tests with coverage for Front-End you can use this command: 
+```
+npm run build
+ npm run test:coverage:frontend
+```
+
+ From the images above we can tell that their are 9 passing tests and we can see how much of the project has test coverage. 
+ The 9 passing tests show that the frontend components work. The table shows we have 100 percent coverage in the frontend. 
