@@ -1,0 +1,3 @@
+### Contributing 
+
+This is a private repository for the Pollinator Habitat app. Contributions are limited to approved team members. Before pushing changes, create a feature branch from main, follow our established TypeScript and formatting standards, and ensure the project builds cleanly in both local and Docker environments. All commits should include clear, descriptive messages and be reviewed through a pull request before merging. Avoid committing sensitive information or modifying deployment configurations without prior discussion. Collaboration, communication, and code quality are the top priorities for this project.
