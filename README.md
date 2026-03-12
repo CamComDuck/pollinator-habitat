@@ -10,12 +10,11 @@ This accessible app will lead Connor Prairie guests to discover the diversity of
 - Campbell Reed
 - C.J. Fulciniti
 - Evan Kiser
-- Logan Greer
 
 ## **Client Partner Information**
 
 ### *Company:*
-Connor Prairie
+Conner Prairie
 
 ### *People:*
 - Ronda Hamm
