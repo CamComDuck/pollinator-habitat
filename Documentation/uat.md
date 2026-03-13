@@ -16,17 +16,17 @@
 
 # 2. Acceptance Scenarios
 
-## Feature:  Routes in game should be able to be repeated indefinitely 
+## Feature:  Pollinator Habitat Activity should be repeatable 
 
 ### Scenario 1: Happy Path
 **Given:**
-User joins active session
+User is a part of an active Pollinator Habitat activity session
 
 **When:**
-When the route is complete
+When the route is completed and the final fact is displayed to the user
 
 **Then:**
-An option for a new, unique route is available without going to the main menu
+A button displays to the user that allows for a new route activity to be completed
 
 **Status:** (Not Tested / Internal Passed / Client Accepted)
 Internal Passed
