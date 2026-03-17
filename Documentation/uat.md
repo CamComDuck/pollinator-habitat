@@ -1,6 +1,6 @@
 # User Acceptance Testing (UAT)
 
-## Last Updated: 2/24/2026
+## Last Updated: 3/17/2026
 
 ---
 
@@ -29,9 +29,10 @@ When the route is completed and the final fact is displayed to the user
 A button displays to the user that allows for a new route activity to be completed
 
 **Status:** (Not Tested / Internal Passed / Client Accepted)
-Internal Passed
+Client Accepted
 
-**Evidence:** (link to PR, test file, video, screenshot)
+**Evidence:** (link to PR, **test file**, video, screenshot)
+Test file: frontend/testing/UATs/RepeatbleRoutePlay.test.tsx
 
 ### Scenario 2: Error Handling
 **Given:**
@@ -52,7 +53,7 @@ Unknown if implemented ( should check )
 
 ---
 
-## Feature: Pollinator Collection Page
+## Feature: Pollinator Collection Event and Page
 ### Scenario 1: Happy Path
 **Given:**
 A user has completed a route
@@ -61,12 +62,45 @@ A user has completed a route
 When navigating to the collection page
 
 **Then:**
-Completed routes are shown as collection pollinators with sprites
+Completed routes are shown as collected pollinators with filled in sprites
 
 **Status:** (Not Tested / Internal Passed / Client Accepted)
-Internal Passed
+Client Accepted
 
-**Evidence:** (link to PR, test file, video, screenshot)
+**Evidence:** (link to PR, **test file**, video, screenshot)
+Test file: frontend/testing/UATs/PollinatorCollection.test.tsx
+
+### Scenario 2: Error Handling
+**Given:**
+
+**When:**
+
+**Then:**
+
+**Status:**
+
+**Evidence:**
+
+### Scenario 3: Edge Case
+...
+
+---
+## Feature: One-time Survey Prompt 
+### Scenario 1: Happy Path
+**Given:**
+User is a part of valid session
+
+**When:**
+Last fact node is reached
+
+**Then:**
+A small one time, optional survey should appear, asking about the party size by age category. 
+
+**Status:** (Not Tested / Internal Passed / Client Accepted)
+Client Accepted
+
+**Evidence:** (link to PR, **test file**, video, screenshot)
+Test file: frontend/testing/UATs/OneTimeSurveyPopUp.test.tsx
 
 ### Scenario 2: Error Handling
 **Given:**
