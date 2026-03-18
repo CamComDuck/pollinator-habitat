@@ -1,248 +1,377 @@
 # Development Environment Manual
 
-## System Overview / Tech Stack Explanation
+## System Overview / Architecture
 
-The system uses React for the Front-End which is the user facing system and it requests and processes data from the Back-end to show the user and the backend will eventually rettrieve polinator data from the MySQL database. 
+The Pollinator Habitat application is composed of six services that work together:
+
+```
+ User (Browser)                  Staff (Browser)
+       │                                │
+       ▼                                ▼
+┌─────────────┐                ┌───────────────┐
+│  Frontend   │                │    Portal     │
+│  Next.js    │                │   Next.js     │
+│  Port 3000  │                │   Port 3001   │
+└──────┬──────┘                └──────┬────────┘
+       │  REST API (JWT)              │  REST API
+       └──────────────┬───────────────┘
+                      ▼
+             ┌────────────────┐
+             │    Backend     │
+             │  Node/Express  │
+             │   Port 4000    │
+             └──────┬─────────┘
+                    │  Prisma ORM
+                    ▼
+             ┌────────────────┐
+             │     MySQL      │
+             │   Port 3306    │
+             └────────────────┘
+
+  (Production only)
+  External Traffic → Nginx (Port 80) → Frontend / Backend
+```
+
+### Module Descriptions
+
+- **Frontend** (Next.js, port 3000) — User-facing application. Guides visitors through an interactive pollinator route. Communicates with the backend via REST API, authenticated using JWT tokens that encode the session ID and a auto-generated PlayerID.
+
+- **Portal** (Next.js, port 3001) — Staff-facing data collection portal. Allows staff to query and export visitor survey statistics. Communicates with the backend via REST API.
+
+- **Backend** (Node.js/Express, port 4000) — Central REST API. Handles game logic, route progression, JWT authentication middleware, and visitor survey data. Uses Prisma ORM to read and write to MySQL.
+
+- **MySQL** (port 3306) — Persistent database. Stores sessions, pollinator routes, route nodes, facts, player sessions, and survey data and it will soon store basic statistics about player engagements. Initialized via Prisma migrations and seeded on first startup.
+
+- **Nginx** (port 80, production only) — Reverse proxy. Routes incoming external traffic to the frontend and backend services.
+
+- **Shared package** (`/shared`) — Internal TypeScript types shared between the frontend and backend to ensure consistent interfaces across the application.
+
 ## Required Tools & Technologies
-Node.js 24.11,Git,VSCode,Docker desktop and engine,Containers Extention,NPM that comes with node.js
-containers extention makes it easier to run containers. 
+- Node.js (latest LTS recommended, minimum v20.19.0)
+- Git
+- VSCode
+- Docker Desktop and engine
+- Containers extension (Simplifies running Docker containers)
+- Recommended to use VSCode with typescript/javascript extensions for ease of use
 
-You should VSCode with typescript/javascript extentions as well as have git installed and VScode is recomended due to ease of use. 
-## BACKEND & FRONTEND 
+## Backend & Frontend
+
 ### Folder Structure Explanation and important files
 ```text
-┣ 📂Documentation // Folder Containing Documentation 
-┃ ┣ 📂pics // Folder of images used by the Project
+┣ 📂.devcontainer
+┃ ┗ 📜devcontainer.json
+┣ 📜.gitignore
+┣ 📜Contributing.md
+┣ 📂Documentation
+┃ ┣ 📂pics
+┃ ┃ ┣ 📜AccessibilitySettingsMenu.png
+┃ ┃ ┣ 📜backendtests.png
+┃ ┃ ┣ 📜CollectionCount.png
+┃ ┃ ┣ 📜CollectionPage.png
 ┃ ┃ ┣ 📜dev_environment.png
+┃ ┃ ┣ 📜DirectionBar.png
 ┃ ┃ ┣ 📜folders.png
+┃ ┃ ┣ 📜FrontendTestingScreenshot.png
+┃ ┃ ┣ 📜HomeButton.png
 ┃ ┃ ┣ 📜Pollinator_6_Legs.png
 ┃ ┃ ┣ 📜PollinatorArrivedAtLocation.png
 ┃ ┃ ┣ 📜PollinatorStart.png
 ┃ ┃ ┣ 📜Project1.png
-┃ ┃ ┗ 📜Project2.png
+┃ ┃ ┣ 📜Project2.png
+┃ ┃ ┣ 📜RestartPrompt.png
+┃ ┃ ┣ 📜RouteImageWorkers.png
+┃ ┃ ┗ 📜StartScreenNew.png
 ┃ ┣ 📜Contributing.md
 ┃ ┣ 📜Deployment.md
 ┃ ┣ 📜Development.md
 ┃ ┣ 📜README.md
 ┃ ┗ 📜User.md
-┣ 📂Pollinator-Habitat // Root of the Monolith Project
-┃ ┣ 📂backend  // Root of the Backend Project
-┃ ┃ ┣ 📂prisma // Folder for Database Schema when database will be used 
-┃ ┃ ┃ ┗ 📜schema.prisma // Schema file used to define structure of database with prisma
-┃ ┃ ┣ 📂src // Folder with Backend Source code such as main server file and other classes and API's
-┃ ┃ ┃ ┣ 📂api // API's folder currentl all API's are in one file 
-┃ ┃ ┃ ┃ ┗ 📜api.ts 
-┃ ┃ ┃ ┣ 📂Factories // folder with json data for polinators and classes to read it. 
-┃ ┃ ┃ ┃ ┣ 📜FactNodeFactory.ts 
-┃ ┃ ┃ ┃ ┣ 📜FactNodes.json
-┃ ┃ ┃ ┃ ┣ 📜RouteFactory.ts
-┃ ┃ ┃ ┃ ┣ 📜RouteNodeFactory.ts
-┃ ┃ ┃ ┃ ┣ 📜RouteNodes.json
-┃ ┃ ┃ ┃ ┗ 📜Routes.json
-┃ ┃ ┃ ┣ 📜FactNode.ts
-┃ ┃ ┃ ┣ 📜index.ts // Main server file 
-┃ ┃ ┃ ┣ 📜Player.ts
-┃ ┃ ┃ ┣ 📜Route.ts
-┃ ┃ ┃ ┣ 📜RouteNode.ts
-┃ ┃ ┃ ┣ 📜Session.ts
-┃ ┃ ┃ ┣ 📜Start.ts
-┃ ┃ ┃ ┗ 📜test.ts
-┃ ┃ ┣ 📂testing // Folder for Backend tests
-┃ ┃ ┃ ┗ 📜RouteNode.test.js
-┃ ┃ ┣ 📜.gitignore // file defining what files should not be tracked by git
-┃ ┃ ┣ 📜Dockerfile //production docker file to create container
-┃ ┃ ┣ 📜dockerfile.dev // Development Docker file to create contianer for devs
-┃ ┃ ┣ 📜package.json // Defines the packages used by the backend project
-┃ ┃ ┣ 📜prisma.config.ts // config file for prisma the orm 
-┃ ┃ ┗ 📜tsconfig.json // Typescript configuration file for backend 
+┣ 📂Pollinator-Habitat
+┃ ┣ 📂backend
+┃ ┃ ┣ 📂coverage
+┃ ┃ ┣ 📂generated
+┃ ┃ ┣ 📂JsonDataBackups
+┃ ┃ ┃ ┣ 📜FactNodes.json
+┃ ┃ ┃ ┣ 📜RouteNodes.json
+┃ ┃ ┃ ┗ 📜Routes.json
+┃ ┃ ┣ 📂prisma
+┃ ┃ ┃ ┣ 📂migrations
+┃ ┃ ┃ ┃ ┣ 📂20260224061121_init
+┃ ┃ ┃ ┃ ┃ ┗ 📜migration.sql
+┃ ┃ ┃ ┃ ┣ 📂20260316200703_add_survey_fields
+┃ ┃ ┃ ┃ ┃ ┗ 📜migration.sql
+┃ ┃ ┃ ┃ ┗ 📜migration_lock.toml
+┃ ┃ ┃ ┣ 📜prisma-uml.png
+┃ ┃ ┃ ┣ 📜schema.prisma
+┃ ┃ ┃ ┗ 📜seed.js
+┃ ┃ ┣ 📂src
+┃ ┃ ┃ ┣ 📂api
+┃ ┃ ┃ ┃ ┣ 📂interfaces
+┃ ┃ ┃ ┃ ┃ ┗ 📜api.interfaces.ts
+┃ ┃ ┃ ┃ ┣ 📂Utilities
+┃ ┃ ┃ ┃ ┃ ┣ 📜api.utilities.ts
+┃ ┃ ┃ ┃ ┃ ┗ 📜reshape.Utilites.ts
+┃ ┃ ┃ ┃ ┗ 📜api.ts
+┃ ┃ ┃ ┣ 📂Back-end_types
+┃ ┃ ┃ ┃ ┗ 📜route.dto.ts
+┃ ┃ ┃ ┣ 📂middleware
+┃ ┃ ┃ ┃ ┗ 📜middleware.ts
+┃ ┃ ┃ ┣ 📂services
+┃ ┃ ┃ ┃ ┣ 📂db
+┃ ┃ ┃ ┃ ┃ ┣ 📂DatabaseOperationsServices
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂Create
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜getOrCreatePlayerSession.service.ts
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂Read
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜getActiveRouteForPlayerSession.service.ts
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜getchildadultdatabystartandend.ts
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜getchildnumandadultdatetoforever.ts
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜getchildnumandadulttoenddate.ts
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜getChildrenandAdultsbySession.ts
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜GetpolinatorNames.ts
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜getsessionandPlayeridbyAdultsize.ts
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜getsessionidsandplayeridsbyfamilysize.ts
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜getSessionsandPlayeridsbyChildSize.ts
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜hassession.service.ts
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜LoadRouteDTO.service.ts
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂Transactions
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜getNextRouteForPlayerSession.service.ts
+┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂Update
+┃ ┃ ┃ ┃ ┃ ┃   ┗ 📜addChildrenadults.ts
+┃ ┃ ┃ ┃ ┃ ┗ 📜prisma.ts
+┃ ┃ ┃ ┃ ┣ 📂gameServiceUtils
+┃ ┃ ┃ ┃ ┃ ┣ 📜CheckSession.service.ts
+┃ ┃ ┃ ┃ ┃ ┗ 📜PlayeridTypeCheck.ts
+┃ ┃ ┃ ┃ ┣ 📜game.service.ts
+┃ ┃ ┃ ┃ ┣ 📜route.service.ts
+┃ ┃ ┃ ┃ ┗ 📜statistics.service.ts
+┃ ┃ ┃ ┣ 📜app.ts
+┃ ┃ ┃ ┗ 📜index.ts
+┃ ┃ ┣ 📂tests
+┃ ┃ ┃ ┣ 📂integration
+┃ ┃ ┃ ┃ ┗ 📜routes.test.ts
+┃ ┃ ┃ ┣ 📂unit
+┃ ┃ ┃ ┃ ┣ 📂campbell
+┃ ┃ ┃ ┃ ┃ ┣ 📜api.test.ts
+┃ ┃ ┃ ┃ ┃ ┣ 📜api.utilities.test.ts
+┃ ┃ ┃ ┃ ┃ ┣ 📜CheckSession.service.test.ts
+┃ ┃ ┃ ┃ ┃ ┣ 📜game.service.test.ts
+┃ ┃ ┃ ┃ ┃ ┣ 📜getOrCreatePlayerSession.test.ts
+┃ ┃ ┃ ┃ ┃ ┣ 📜index.test.ts
+┃ ┃ ┃ ┃ ┃ ┣ 📜prisma.test.ts
+┃ ┃ ┃ ┃ ┃ ┣ 📜reshape.utilities.test.ts
+┃ ┃ ┃ ┃ ┃ ┗ 📜route.service.test.ts
+┃ ┃ ┃ ┃ ┗ 📜middleware.test.ts
+┃ ┃ ┃ ┗ 📜tsconfig.json
+┃ ┃ ┣ 📜.env
+┃ ┃ ┣ 📜.gitignore
+┃ ┃ ┣ 📜Dockerfile
+┃ ┃ ┣ 📜dockerfile.dev
+┃ ┃ ┣ 📜package.json
+┃ ┃ ┣ 📜prisma.config.ts
+┃ ┃ ┣ 📜tsconfig.json
+┃ ┃ ┗ 📜vitest.config.ts
 ┃ ┣ 📂frontend
-┃ ┃ ┣ 📂public // Folder for public static files
-┃ ┃ ┃ ┣ 📂fonts // Folder for Fonts 
+┃ ┃ ┣ 📂public
+┃ ┃ ┃ ┣ 📂fonts
 ┃ ┃ ┃ ┃ ┗ 📜Antonio-Regular.ttf
-┃ ┃ ┃ ┣ 📂images // Folder for images used in project
+┃ ┃ ┃ ┣ 📂images
+┃ ┃ ┃ ┃ ┣ 📜CP_TTS_Button.png
 ┃ ┃ ┃ ┃ ┣ 📜CPLOGO.png
 ┃ ┃ ┃ ┃ ┣ 📜debug_spritesheet.png
-┃ ┃ ┃ ┃ ┗ 📜placeholder.png
+┃ ┃ ┃ ┃ ┣ 📜minusarrow.svg
+┃ ┃ ┃ ┃ ┣ 📜placeholder.png
+┃ ┃ ┃ ┃ ┣ 📜plusarrow.svg
+┃ ┃ ┃ ┃ ┣ 📜spritesheet_transparent.png
+┃ ┃ ┃ ┃ ┗ 📜spritesheet.png
 ┃ ┃ ┃ ┗ 📜favicon.ico
-┃ ┃ ┣ 📂src // Front-end source code folder 
-┃ ┃ ┃ ┣ 📂app // folder containing folders of pages and css.
-┃ ┃ ┃ ┃ ┣ 📂accessibility // accessibility page folder 
+┃ ┃ ┣ 📂src
+┃ ┃ ┃ ┣ 📂app
+┃ ┃ ┃ ┃ ┣ 📂accessibility
 ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
-┃ ┃ ┃ ┃ ┣ 📂home // home page folder
+┃ ┃ ┃ ┃ ┣ 📂home
 ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
-┃ ┃ ┃ ┃ ┣ 📂route // route page 
+┃ ┃ ┃ ┃ ┣ 📂pollinator-collection
 ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+┃ ┃ ┃ ┃ ┣ 📂redirecting
+┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+┃ ┃ ┃ ┃ ┣ 📂route
+┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+┃ ┃ ┃ ┃ ┣ 📂services
+┃ ┃ ┃ ┃ ┃ ┣ 📜jwtService.ts
+┃ ┃ ┃ ┃ ┃ ┣ 📜routeService.ts
+┃ ┃ ┃ ┃ ┃ ┗ 📜surveyStorageService.ts
 ┃ ┃ ┃ ┃ ┣ 📜components.tsx
 ┃ ┃ ┃ ┃ ┣ 📜globals.css
 ┃ ┃ ┃ ┃ ┣ 📜layout.tsx
 ┃ ┃ ┃ ┃ ┗ 📜page.tsx
-┃ ┃ ┃ ┣ 📂utils // utiliites used in front-end
-┃ ┃ ┃ ┃ ┗ 📜globalCSSValidator.js
-┃ ┃ ┃ ┗ 📜global.d.ts
-┃ ┃ ┣ 📂testing // front-end tests folder
-┃ ┃ ┃ ┣ 📜Components.test.js
-┃ ┃ ┃ ┗ 📜CSS-Utils.test.js
-┃ ┃ ┣ 📜.gitignore // frontend files to ignore
-┃ ┃ ┣ 📜Dockerfile // production docker file with configs to spin up container
-┃ ┃ ┣ 📜dockerfile.dev // Development Docker file to define configs to spin up image
-┃ ┃ ┣ 📜eslint.config.mjs // config file for eslint rules
-┃ ┃ ┣ 📜next-env.d.ts // file for next.js environment 
-┃ ┃ ┣ 📜next.config.mjs // next.js config file 
-┃ ┃ ┣ 📜package.json // file contains packages list for front end 
-┃ ┃ ┣ 📜postcss.config.mjs // css configuration 
+┃ ┃ ┃ ┣ 📜global.d.ts
+┃ ┃ ┃ ┗ 📜middleware.ts
+┃ ┃ ┣ 📂testing
+┃ ┃ ┃ ┣ 📂UAT
+┃ ┃ ┃ ┃ ┣ 📜OneTimePartyASizeSurvey.test.tsx
+┃ ┃ ┃ ┃ ┣ 📜PollinatorCollection.test.tsx
+┃ ┃ ┃ ┃ ┗ 📜RepeatableRoutePlay.test.tsx
+┃ ┃ ┃ ┣ 📜AccessibilityPage.test.tsx
+┃ ┃ ┃ ┣ 📜HomePage.test.tsx
+┃ ┃ ┃ ┣ 📜jwtService.test.tsx
+┃ ┃ ┃ ┣ 📜Layout.test.tsx
+┃ ┃ ┃ ┣ 📜Middleware.test.tsx
+┃ ┃ ┃ ┣ 📜PollinatorCollectionPage.test.tsx
+┃ ┃ ┃ ┣ 📜RedirectPage.test.tsx
+┃ ┃ ┃ ┣ 📜RootPage.test.tsx
+┃ ┃ ┃ ┣ 📜RootPageAPI.test.tsx
+┃ ┃ ┃ ┣ 📜RoutePageFlow.test.tsx
+┃ ┃ ┃ ┣ 📜routeService.test.tsx
+┃ ┃ ┃ ┣ 📜setup.ts
+┃ ┃ ┃ ┗ 📜surveyStorageService.test.tsx
+┃ ┃ ┣ 📜.gitignore
+┃ ┃ ┣ 📜Dockerfile
+┃ ┃ ┣ 📜dockerfile.dev
+┃ ┃ ┣ 📜eslint.config.mjs
+┃ ┃ ┣ 📜next-env.d.ts
+┃ ┃ ┣ 📜next.config.mjs
+┃ ┃ ┣ 📜package.json
+┃ ┃ ┣ 📜postcss.config.mjs
 ┃ ┃ ┣ 📜README.md
-┃ ┃ ┗ 📜tsconfig.json // Typescript configuration file for front end 
-┃ ┣ 📂shared // folder of shared files between front-end and backend
-┃ ┃ ┣ 📜index.js 
-┃ ┃ ┣ 📜tsconfig.json // typescript config file for shared files
+┃ ┃ ┣ 📜tsconfig.json
+┃ ┃ ┗ 📜vitest.config.ts
+┃ ┣ 📂mysql-init
+┃ ┃ ┗ 📜create_shadow.sql
+┃ ┣ 📂nginx
+┃ ┃ ┗ 📜nginx.conf
+┃ ┣ 📂portal
+┃ ┃ ┣ 📂public
+┃ ┃ ┃ ┣ 📂images
+┃ ┃ ┃ ┃ ┣ 📜CP_Wordmark.png
+┃ ┃ ┃ ┃ ┣ 📜CPLOGO.png
+┃ ┃ ┃ ┃ ┗ 📜favicon.ico
+┃ ┃ ┃ ┣ 📜minusarrow.svg
+┃ ┃ ┃ ┗ 📜plusarrow.svg
+┃ ┃ ┣ 📂src
+┃ ┃ ┃ ┣ 📂app
+┃ ┃ ┃ ┃ ┣ 📜components.tsx
+┃ ┃ ┃ ┃ ┣ 📜globals.css
+┃ ┃ ┃ ┃ ┣ 📜layout.tsx
+┃ ┃ ┃ ┃ ┗ 📜page.tsx
+┃ ┃ ┃ ┗ 📂services
+┃ ┃ ┃   ┣ 📜fetchService.ts
+┃ ┃ ┃   ┗ 📜inputValidator.ts
+┃ ┃ ┣ 📂testing
+┃ ┃ ┃ ┣ 📂UAT
+┃ ┃ ┃ ┃ ┗ 📜ExportSearchResults.test.tsx
+┃ ┃ ┃ ┣ 📜inputValidator.test.tsx
+┃ ┃ ┃ ┣ 📜layout.test.tsx
+┃ ┃ ┃ ┣ 📜portalFunction.test.tsx
+┃ ┃ ┃ ┣ 📜portalStructure.test.tsx
+┃ ┃ ┃ ┗ 📜setup.ts
+┃ ┃ ┣ 📜.gitignore
+┃ ┃ ┣ 📜Dockerfile
+┃ ┃ ┣ 📜dockerfile.dev
+┃ ┃ ┣ 📜eslint.config.mjs
+┃ ┃ ┣ 📜next-env.d.ts
+┃ ┃ ┣ 📜next.config.ts
+┃ ┃ ┣ 📜package.json
+┃ ┃ ┣ 📜postcss.config.mjs
+┃ ┃ ┣ 📜README.md
+┃ ┃ ┣ 📜tsconfig.json
+┃ ┃ ┗ 📜vitest.config.ts
+┃ ┣ 📂shared
+┃ ┃ ┣ 📂data
+┃ ┃ ┃ ┗ 📜Routes.json
+┃ ┃ ┣ 📜index.js
+┃ ┃ ┣ 📜tsconfig.json
+┃ ┃ ┣ 📜types.js
 ┃ ┃ ┗ 📜types.ts
-┃ ┣ 📜.dockerignore // defines files for docker to not import into containers
-┃ ┣ 📜docker-compose.dev.yml //dev file to spin up both front and back and database containers
-┃ ┣ 📜docker-compose.yml // production file to spin both front and back and database
-┃ ┣ 📜package.json // main package file for packages needed for both front and back-ends
-┃ ┗ 📜tsconfig.base.json // base typescript configs for both front and backend
-┣ 📜.gitignore // ignores files for git 
-┣ 📜Contributing.md
+┃ ┣ 📜.dockerignore
+┃ ┣ 📜docker-compose.dev.yml
+┃ ┣ 📜docker-compose.yml
+┃ ┣ 📜package.json
+┃ ┗ 📜tsconfig.base.json
 ┗ 📜README.md
 
 
 ```
-### Tech-Stack ###
-This project uses Next.JS and React for the Front-End and uses Node/Express for the Backend of the project. This project will use MySql for the Database but is currently not used.
-You need Docker desktop to run this. 
-
-### Install Prerequisites
-
-*   Install Node.js
-    *   <a href="https://nodejs.org/en/download" target="_blank">https://nodejs.org/en/download</a>
-    *   Follow the directions on the website for your OS. 
-      
+### Tech Stack
+This project uses Next.JS and React for the frontend and Node/Express for the backend. This project uses Mysql and Prisma for the database operations. 
 
 ### Clone Repository
 
-
-*   Clone the repository .
-    *  **If you will contribute, fork this repository first and clone your copies.**
-    *  <a href="https://github.com/campbell-r-e/Pollinator-Habitat-main-repo.git" target="_blank">https://github.com/campbell-r-e/Pollinator-Habitat-main-repo.git</a>
-*   You can do it via command line (or choose your own way of cloning a repository, NOT DOWNLOADING).  
-
-    *   **Shift+Right-click** to an empty place on that folder to open a command line.
-    *   Run these commands (it assumes you have **git** installed and **git** command accessible in PATH environment variable):
-        *   <pre>git clone https://github.com/campbell-r-e/Pollinator-Habitat-main-repo.git </pre>
-       
-
-*   You must have the following folder structure if you did everything successfully.
-    *   ![folder_structure](pics/folders.png)
-
-
-### Test the Development Environment
-
-*   Simply browse to <a href="  http://localhost:3000" target="_blank">http://localhost:3000</a>
-*   You should see the following screen:
-    *   ![dev_environment](pics/dev_environment.png)
-*   You will be able to play a game. 
-
-## FRONTEND and Backend
-
-### Installing Prerequisites
-
-*   Install NodeJS (24.11.0 LTS is tested and confirmed to work.)
-    *   <a href="https://nodejs.org/en/download" target="_blank">https://nodejs.org/en/download</a>
-
-### Clone Repository
-
-*   Clone the repository .
-    *  **If you will contribute, fork this repository first and clone your copies.**
-    *  <a href="https://github.com/campbell-r-e/Pollinator-Habitat-main-repo.git" target="_blank">https://github.com/campbell-r-e/Pollinator-Habitat-main-repo.git</a>
-*   You can do it via command line (or choose your own way of cloning a repository, NOT DOWNLOADING).  
-
-    *   **Shift+Right-click** to an empty place on that folder to open a command line.
-    *   Run these commands (it assumes you have **git** installed and **git** command accessible in PATH environment variable):
-        *   <pre>git clone https://github.com/campbell-r-e/Pollinator-Habitat-main-repo.git </pre>
-       
-
-*   You must have the following folder structure if you did everything successfully.
-    *   ![folder_structure](pics/folders.png)
-
-
+- Fork this repository first, then clone the copies: [https://github.com/campbell-r-e/Pollinator-Habitat-main-repo.git](https://github.com/campbell-r-e/Pollinator-Habitat-main-repo.git)
+- Do not download the repository, it should be cloned using the command line, GitHub, or otherwise connected to Git
+- Ensure the cloned repository is placed into an empty folder
+- Command line command: ```git clone https://github.com/campbell-r-e/Pollinator-Habitat-main-repo.git```
 
 ### Install Dependencies
 
-*   Install dependencies by running the command below.
-    *   <pre>npm install in the front and backend folders as well as root</pre>
-
-    *   This might take some time.
-  
-
-### Run the App
+- Install Node.js, following the directions for the local OS: [https://nodejs.org/en/download](https://nodejs.org/en/download)
+- Latest LTS is recommended; minimum v20.19.0
+- After Node.js is installed, run ```npm install``` once from the root workspace folder:
+    - ```/Pollinator-Habitat-Main-Repo/Pollinator-Habitat/```
+- This installs all dependencies for the backend, frontend, portal, and shared packages via npm workspaces. No need to run `npm install` in each subfolder separately.
 
 
-    
-*   Run the app by running the command below.
-   1. npm install
-   2. CD into Polinator-Habitat directory 
-   3. Open 2 terminals, 1 for frontend commands and 1 for backend commands under the Polinator-Habitat directory.
-   4. npm run build --prefix frontend
-   5. npm start --prefix frontend
-   6. npm run build --prefix backend
-   7. npm start --prefix backend
-   8. go to http://localhost:3000/ in a web browser
 
+## Replicating the Development Environment with Docker
 
-    
-## Test the App (Simple integration testing) ##
+Docker allows for running the full development environment (frontend, backend,database and Data Collection Portal) without installing Node.js or configuring anything manually. The `docker-compose.dev.yml` file builds all services front and back ends and database and Portal. 
 
-* Go to http://localhost:3000 and you should the first title page. 
+### Docker Dev Setup
 
+- Refer to [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/) for how to setup and install Docker
+- This project runs six services: frontend, backend, portal, MySQL database, a one-time migrate/seed container, and an nginx reverse proxy
+- To open a Docker container, use the following commands:
+    - ```cd Pollinator-Habitat```
+    - ```docker compose -f docker-compose.dev.yml build --no-cache```
+    - ```docker compose -f docker-compose.dev.yml up```
+- To shutdown a Docker container, run the following command:
+    - ```docker compose -f docker-compose.dev.yml down ```
+- Docker desktop app must be open to run the containers
+- To verify Docker is setup correctly, run the following command:
+    - ```docker ps```
 
-## Replicating via Docker 
+### How It Works
+- **Frontend container:** runs on [http://localhost:3000](http://localhost:3000)
+- **Backend container:** runs on [http://localhost:4000](http://localhost:4000)
+- **Portal container:** runs on [http://localhost:3001](http://localhost:3001)
+- Dependencies are installed inside the containers
+- The local code is mounted into the containers so changes should update instantly
 
+### To Access / See Session IDs
 
-### Docker Dev Setup ###
-refer to  <a href="https://docs.docker.com/engine/install/" target="_blank">https://docs.docker.com/engine/install/</a>
-for how to setup and install Docker.
-This project is in two containers a front-end and a back-end container. 
+After running `docker compose -f docker-compose.dev.yml up`, wait a few moments for the backend to finish starting, then open a new terminal and run:
 
-1. CD into the Pollinator-Habitat folder
-2. Enter    docker compose -f docker-compose.dev.yml build --no-cache
-3. Enter    docker compose -f docker-compose.dev.yml up
+```
+docker logs pollinator-backend-dev
+```
 
-To shutdown Containers docker compose -f docker-compose.dev.yml down 
+The backend logs will print the session ID .
 
-### Docker Production Setup ###
+## Testing – How to Run Tests
 
-refer to  <a href="https://docs.docker.com/engine/install/" target="_blank">https://docs.docker.com/engine/install/</a>
-for how to setup and install Docker.
-This project is in two containers a front-end and a back-end container. 
-Docker Desktop app must be open to run it. 
+### Test the Development Environment
 
-1. CD into the Pollinator-Habitat folder
-2. Enter    docker compose -f docker-compose.yml build --no-cache
-3. Enter    docker compose -f docker-compose.yml up
+The project can be locally viewed and interacted with at [http://localhost:3000](http://localhost:3000) on any web browser. All npm dependencies are chained properly so each command works across root, frontend, and backend. From the test commands terminal output, the test coverage percent is visible for all files. The table shows files that need more test coverage in yellow and files with little or no coverage in red. 
 
-To shutdown Containers docker compose -f docker-compose.yml down 
-
-### Testing – How to Run Tests ### 
-
-## Run All Tests
+#### Run Frontend Tests
 
 ```
 npm run test
 ```
 
-## Run Tests With Coverage
+#### Run All Tests With Coverage (Frontend + Backend + Portal)
 
 ```
 npm run test:coverage
 ```
 
-## Target-Specific Test Commands
+#### Target-Specific Test Commands
 
 Run tests for a specific area of the project:
 
 ```
 npm run test:frontend
 npm run test:backend
+npm run test:portal
 ```
 
 Run coverage for a specific target:
@@ -250,49 +379,5 @@ Run coverage for a specific target:
 ```
 npm run test:coverage:frontend
 npm run test:coverage:backend
+npm run test:coverage:portal
 ```
-All npm dependencies are chained properly so each command works across root, frontend, and backend.
-
-## Docker – How to Verify It Worked
-
-### Check running containers ###
-docker ps
-
-### Verify URL ###
-http://localhost:3000
-
-
-
-## Replicating the Development Environment with Docker
-
-Docker lets you run the full development environment (frontend + backend +database) without installing Node.js or configuring anything manually. The `docker-compose.dev.yml` file builds both services front and back ends and database. 
-
-### How It Works
-- **Frontend container:** runs on **http://localhost:3000**
-- **Backend container:** runs on **http://localhost:4000**
-- Dependencies are installed inside the containers.
-- Your local code is mounted into the containers so changes should update instantly.
-
-### Start the Dev Environment
-![alt text](pics/Backendtests1.png)
-
-![alt text](pics/Backendtests1.png)
-
-In order to run tests with coverage for backend you can use this command: 
-```
-npm run build
- npm run test:coverage:backend
-```
- From the images above we can tell that their are 16 passing tests and we can see how much of the project has test coverage. 
- The 16 passing tests show that the API functions are all working as they should. The table shows files that need more test coverage in yellow and files with little or no coverage in red. 
-
-![alt text](pics/FrontendTestingScreenshot.png)
-
-In order to run tests with coverage for Front-End you can use this command: 
-```
-npm run build
- npm run test:coverage:frontend
-```
-
- From the images above we can tell that their are 9 passing tests and we can see how much of the project has test coverage. 
- The 9 passing tests show that the frontend components work. The table shows we have 100 percent coverage in the frontend. 
