@@ -43,7 +43,7 @@ When you see the word "Start" on your screen, you have successfully joined the a
 ### Overview
 This application is designed to be a quick search tool to retreive party size survey responses and results from the database. With the ability to search by date, date range, or session ID number, the portal provides various ways to access survey response data. 
 
-This data can also be exported to CSV (at the request of our client) so that it can shared with stakeholders or archived for collection purposes. 
+This data will later also be able exported to CSV (at the request of our client) so that it can shared with stakeholders or archived for collection purposes. 
 
 ### Usage Guide: 
 
@@ -53,10 +53,10 @@ Data is grouped by SessionID within the database.
 #### Search by Date
 
 #### 1: Enter in the desired search date in the "Start Date" textbox. 
-(pic here)
+![Start Date textbox](StartDate.png)
 
 #### 2: Click the 'Search' button to obtain results pertaining to the entered date value. 
-(pic here)
+![Date Search results](SearchByDate.png)
 
 #### Search by Date Range
 
@@ -77,13 +77,7 @@ Data is grouped by SessionID within the database.
 #### 2: Click the 'Search' button to obtain results pertaining to the entered SessionId value. 
 (pic here)
 
-#### Export Search Results
 
-#### 1: Have a valid search result within the table, can complete any of the previous 3 search types. 
-
-#### 2: Click the 'Export' button to export a CSV to your browswer. 
-(pic here)
-(result pic)
 
 
 
