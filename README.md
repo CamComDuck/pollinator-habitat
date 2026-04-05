@@ -27,6 +27,6 @@ Conner Prairie
 
 ## **Code Repositories**
 
-- [Example: Mobile App - Android](https://www.github.com/WHEREEVER_THE_ANDROID_CODE_IS/)
-- [Example: Php Backend](https://www.github.com/WHEREEVER_THE_PHP_CODE_IS)
+- [Pollinator Habitat Source Code Repo](https://github.com/campbell-r-e/Pollinator-Habitat-main-repo)
+
 
