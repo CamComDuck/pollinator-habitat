@@ -1,35 +1,18 @@
 # Deploying the Pollinator Habitat Application
 
-## Valid Session Codes
-
-To retrieve valid session IDs:
-1. Start the containers with docker compose up
-2. Wait a few moments for the server to finish starting
-3. Open a new terminal and navigate to the backend folder:
-```bash
-cd backend
-```
-4. Run:
-
-Development:
-```bash
-docker logs pollinator-backend-dev
-```
-Production:
-```bash
-docker logs pollinator-backend
-```
-    
 ## Prerequisites 
 ### Server Requirements
-- **Operating System:** Linux (Any Linux LTS that is still supported) or macOS  
+- **Operating System:** Linux (any supported LTS), macOS, or Windows 10/11 with WSL2 and Docker Desktop  
 - **CPU:** Dual-core or better  
-- **RAM:** Minimum 4 GB (8 GB recommended for Docker)
+- **RAM:** Minimum 4 GB (8 GB recommended for Docker)  
 - **Storage:** 30 GB free disk space  
-- **Network:** Internet access to install Node modules and Docker images
-- **Database:** MySQL or MariaDB (used via Prisma ORM)
+- **Network:** Internet access to pull Docker images and npm packages  
+- **Docker:** Docker Engine or Docker Desktop with Compose v2  
+- **Database:** MySQL 8.4 or PostgreSQL 18 — both run as Docker containers; no separate installation needed  
+- **Node.js:** >= 24.0.0 (only required for running outside Docker)  
+- **npm:** >= 10.0.0 (only required for running outside Docker)  
 
-Firewall ports 80, 3000, 3001, and 4000 need to be open. Recommended deployment environment is a machine running this in Docker. 
+Firewall ports **80** and **3001** must be open for production. In development, ports **80** (frontend), **3001** (portal), and **4000** (backend API) must be reachable from localhost. The backend is **not** exposed externally in production — nginx proxies all traffic.
 
 ## Docker Memory Allocation (macOS & Windows)
 
@@ -48,161 +31,237 @@ macOS / Windows:
 4. Increase Memory slider to 4–8 GB
 5. Apply & Restart
 
+## Environment Variables
+
+Before running any compose file, create a `.env` file in the project root (next to the compose files) with at minimum:
+
+```env
+JWT_SECRET=your-secret-here
+```
+
+For production MySQL, also set:
+```env
+MYSQL_ROOT_PASSWORD=...
+MYSQL_DATABASE=pollinator
+MYSQL_USER=pollinator
+MYSQL_PASSWORD=...
+DATABASE_URL=mysql://pollinator:<password>@mysql:3306/pollinator
+SHADOW_DATABASE_URL=mysql://pollinator:<password>@mysql:3306/pollinator_shadow
+```
+
+For production PostgreSQL, copy and edit `.env.pg.example` in the project root.
+
+Development compose files use hardcoded credentials and do not require a `.env` file, except that `JWT_SECRET` must still be set.
+
+> Never modify files inside `node_modules`. All environment-dependent variables are set in the compose files or `.env` and do not need to be changed for local development beyond setting `JWT_SECRET`.
+
 ## Building and Compiling
 
-- Set Any Environment Dependent Variables Before Deploying
-    - Never modify inside node_modules. Environment variables (e.g. DATABASE_URL) are set in the docker-compose files and do not need to be changed for local development.
-- Authentication API Endpoint
-    - JWT is Used for Authentication and it is by a SessionId in the JWT. 
-- API Base Url
-    - http://localhost:4000
-
 ### File and Folder Placement
-Clone the repository into `/opt/pollinator-habitat` (Linux) or `~/Documents/Pollinator-Habitat` (macOS/Windows).  Might require sudo in Linux and Unix like Systems and Admin rights on Windows.
-Do NOT move the frontend, backend, or portal out of the Pollinator-Habitat folder — it will cause it not to work with Docker.
+Clone the repository into `/opt/pollinator-habitat` (Linux) or `~/Documents/Pollinator-Habitat` (macOS/Windows). This may require `sudo` on Linux and admin rights on Windows.  
+Do **not** move `frontend`, `backend`, `portal`, or `shared` out of the project root — Docker volume mounts depend on this structure.
+
+### Compose Files Overview
+
+All compose commands must be run from the project root (the folder containing the compose files).
+
+| File | Purpose | Database |
+|---|---|---|
+| `docker-compose.dev.yml` | Development with hot reload | MySQL |
+| `docker-compose.dev.pg.yml` | Development with hot reload | PostgreSQL |
+| `docker-compose.yml` | Production build | MySQL |
+| `docker-compose.prod.pg.yml` | Production build | PostgreSQL |
+
+On first startup, a `migrate` service runs automatically to apply Prisma migrations and seed the database. This runs once and exits before the backend starts.
 
 ## Installing and Setting Up Docker
-
-Run docker compose files from the root of the project. There are two compose files:
-
-- **`docker-compose.dev.yml`** — for development. Supports hot reload and mounts source files as volumes. Accessible via localhost only.
-- **`docker-compose.yml`** — for production. Builds optimized containers intended for deployment. Accessible over the network or via localhost.
 
 Follow these steps to install and configure **Docker Desktop** or **Docker Engine**.
 
 ### Check for Existing Installation
-
-Before installing, check if Docker is already installed:
 
 ```bash
 docker --version
 docker compose version
 ```
 
-### Docker Development Container Setup 
+## Docker Development Container Setup 
 
-
-To build and run containers issue this command from the root of the project 
+### MySQL (default)
 
 ```sh
 docker compose -f docker-compose.dev.yml build
 docker compose -f docker-compose.dev.yml up
 ```
-Or to rebuild automatically on changes:
+Or rebuild and run in one step:
 ```sh
 docker compose -f docker-compose.dev.yml up --build
 ```
 
-Frontend runs on → http://localhost:3000
-Backend runs on → http://localhost:4000
-Portal runs on → http://localhost:3001
-to stop containers
+### PostgreSQL
 
 ```sh
-docker compose -f docker-compose.dev.yml down
+docker compose -f docker-compose.dev.pg.yml build
+docker compose -f docker-compose.dev.pg.yml up
+```
+Or rebuild and run in one step:
+```sh
+docker compose -f docker-compose.dev.pg.yml up --build
 ```
 
-### Docker Production Container Setup 
+**Development service URLs:**
 
-To build and run containers issue this command from the root of the project 
+| Service | URL |
+|---|---|
+| Frontend | http://localhost:80 |
+| Portal | http://localhost:3001 |
+| Backend API | http://localhost:4000 |
+
+To stop containers:
+```sh
+docker compose -f docker-compose.dev.yml down
+# or for PostgreSQL:
+docker compose -f docker-compose.dev.pg.yml down
+```
+
+## Docker Production Container Setup 
+
+In production, an **nginx** reverse proxy sits in front of all services. The backend is not exposed directly — nginx routes `/api/` requests to the backend and all other traffic to the frontend or portal.
+
+### MySQL (default)
 
 ```sh
 docker compose -f docker-compose.yml build
 docker compose -f docker-compose.yml up
 ```
-Or to rebuild automatically on changes:
+Or rebuild and run in one step:
 ```sh
 docker compose -f docker-compose.yml up --build
 ```
 
-Frontend runs on → http://localhost:3000
-Backend runs on → http://localhost:4000
-Portal runs on → http://localhost:3001
-to stop containers
+### PostgreSQL
 
 ```sh
-docker compose -f docker-compose.yml down
+docker compose -f docker-compose.prod.pg.yml build
+docker compose -f docker-compose.prod.pg.yml up
 ```
-## Errors, Troubleshooting, and Maintenance Guide
+Or rebuild and run in one step:
+```sh
+docker compose -f docker-compose.prod.pg.yml up --build
+```
 
-This short guide explains how to fix the most common problems and keep the Pollinator Habitat web application running smoothly.
+**Production service URLs (via nginx):**
+
+| Service | URL |
+|---|---|
+| Frontend | http://\<host\>:80 |
+| Portal | http://\<host\>:3001 |
+| Backend API | http://\<host\>/api/ (proxied by nginx) |
+
+To stop containers:
+```sh
+docker compose -f docker-compose.yml down
+# or for PostgreSQL:
+docker compose -f docker-compose.prod.pg.yml down
+```
+
+## Errors, Troubleshooting, and Maintenance Guide
 
 ### Common Issues
 
 #### Missing Dependencies
-If you see errors like “module not found” or “cannot find module”:
+If you see errors like "module not found" or "cannot find module":
 ```bash
 npm install
 ```
-If a container fails to start and you see:
-Error: listen EADDRINUSE
-It means something is already using that port. Stop the containers and check what is using the port:
+
+#### Port Already in Use
+If a container fails to start with `Error: listen EADDRINUSE`, something is already using that port. Stop the containers and check:
 ```bash
 docker compose -f docker-compose.dev.yml down
+lsof -i :80
+lsof -i :3001
 lsof -i :4000
 ```
 
-#### Common Issues
-- Incorrect folder structure
-- Port already in use
-- Backend cannot bind to port 4000
-- Frontend cannot reach backend API
-
-Fix port issues:
+To kill stray node processes:
+```bash
 sudo pkill -f node
-lsof -i :3000
-lsof -i :3001
-lsof -i :4000
+```
 
-#### What are the most critical pieces that can fail
-- Database
-- Environment variables when used
+#### What Are the Most Critical Pieces That Can Fail
+- Database (MySQL or PostgreSQL container not healthy)
+- Missing or incorrect `.env` / `JWT_SECRET`
+- `migrate` service failing (check logs before backend starts)
 - Backend API crash
-- Frontend build errors
+- Frontend or portal build errors
 - Docker image build failures
-
+- nginx misconfiguration (production only)
 
 #### Failing Builds
 
-- Rebuild (Development) without cache: ```docker compose -f docker-compose.dev.yml build --no-cache```
-- Rebuild and run (Development): ```docker compose -f docker-compose.dev.yml up --build```
-- Rebuild (Production) without cache: ```docker compose -f docker-compose.yml build --no-cache```
-- Rebuild and run (Production): ```docker compose -f docker-compose.yml up --build```
-- If frontend fails:
-    - Delete “node_modules” inside /frontend
-    - Run: ```npm install --prefix frontend```
-- If backend fails:
-    - Delete “node_modules” inside /backend
-    - Run: ```npm install --prefix backend```
-- If portal fails:
-    - Delete “node_modules” inside /portal
-    - Run: ```npm install --prefix portal```
+Rebuild without cache:
+```bash
+# Development (MySQL)
+docker compose -f docker-compose.dev.yml build --no-cache
+# Development (PostgreSQL)
+docker compose -f docker-compose.dev.pg.yml build --no-cache
+# Production (MySQL)
+docker compose -f docker-compose.yml build --no-cache
+# Production (PostgreSQL)
+docker compose -f docker-compose.prod.pg.yml build --no-cache
+```
 
-#### Check If Services Are Actually Running
-```docker ps```
+If a specific package fails to install:
+- Frontend: delete `frontend/node_modules` then run `npm install --prefix frontend`
+- Backend: delete `backend/node_modules` then run `npm install --prefix backend`
+- Portal: delete `portal/node_modules` then run `npm install --prefix portal`
 
+#### Check If Services Are Running
+```bash
+docker ps
+```
 
 ### Production Start/Stop
 ```sh
-docker compose -f docker-compose.yml up
+# MySQL
+docker compose -f docker-compose.yml up -d
 docker compose -f docker-compose.yml down
+# PostgreSQL
+docker compose -f docker-compose.prod.pg.yml up -d
+docker compose -f docker-compose.prod.pg.yml down
 ```
 
 ### Quick Health Check
 
-Frontend, Open in browser: [http://localhost:3000](http://localhost:3000)
+- Frontend: [http://localhost:80](http://localhost:80)  
+- Portal: [http://localhost:3001](http://localhost:3001)  
+- Backend (dev only): [http://localhost:4000](http://localhost:4000)
 
-####  Where Logs Are Found
-##### 1. Docker Logs
+### Where Logs Are Found
 
-Development containers:
-```docker compose -f docker-compose.dev.yml logs -f```
+#### Docker Logs
 
-Production containers:
-```docker compose -f docker-compose.yml logs -f```
+Development (MySQL):
+```bash
+docker compose -f docker-compose.dev.yml logs -f
+docker compose -f docker-compose.dev.yml logs -f backend
+docker compose -f docker-compose.dev.yml logs -f frontend
+docker compose -f docker-compose.dev.yml logs -f portal
+docker compose -f docker-compose.dev.yml logs -f migrate
+```
 
-Specific service:
-```docker compose -f docker-compose.dev.yml logs -f backend```
-```docker compose -f docker-compose.dev.yml logs -f frontend```
-```docker compose -f docker-compose.dev.yml logs -f portal```
+Development (PostgreSQL):
+```bash
+docker compose -f docker-compose.dev.pg.yml logs -f
+```
 
+Production (MySQL):
+```bash
+docker compose -f docker-compose.yml logs -f
+```
+
+Production (PostgreSQL):
+```bash
+docker compose -f docker-compose.prod.pg.yml logs -f
+```
