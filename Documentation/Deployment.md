@@ -46,10 +46,9 @@ MYSQL_DATABASE=pollinator
 MYSQL_USER=pollinator
 MYSQL_PASSWORD=...
 DATABASE_URL=mysql://pollinator:<password>@mysql:3306/pollinator
-SHADOW_DATABASE_URL=mysql://pollinator:<password>@mysql:3306/pollinator_shadow
 ```
 
-For production PostgreSQL, copy and edit `.env.pg.example` in the project root.
+For production PostgreSQL, edit `.env.pg.example` in the project root — the production compose file reads it directly via `env_file`.
 
 Development compose files use hardcoded credentials and do not require a `.env` file, except that `JWT_SECRET` must still be set.
 
