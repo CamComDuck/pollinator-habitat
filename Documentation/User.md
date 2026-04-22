@@ -91,17 +91,42 @@ When you see the word "Start" on your screen, you have successfully joined the a
 ![Pollinator Collection Page](pics/CollectionPage.png)
 
 ## Pollinator Habitat Admin Portal 
-### Overview
-This application is designed to be a quick search tool to retreive party size survey responses and results from the database. With the ability to search by date, date range, or session ID number, the portal provides various ways to access survey response data. 
+## Overview
+The Conner Prairie Pollinator Habitat Portal is a lightweight application designed to allow the easy access to data from survey responses and general activity use. 
 
-This data will later also be able exported to CSV (at the request of our client) so that it can shared with stakeholders or archived for collection purposes. 
+There are 3 tools within the Conner Prairie Pollinator Habitat Portal:
+#### 1. Survey Response Data Search Tool
+#### 2. Route Data Search Tool
+#### 3. Quick Export Tool (Can be either Route or Survey Data)
 
-### Usage Guide: 
+The two data search tools provide a way to search for specific date export of survey data based on the search criteria. The quick export tool provides a quick way to get data reports for a chosen timespan (last 6 months) 
 
-The portal page is a single page application designed to allow the access and export of survey data based on the search criteria. 
-Data is grouped by SessionID within the database. 
+## Usage Guide: 
 
-#### Search by Date
+### Splash Page
+The landing page of the application takes you to a disclosure prohibiting unauthorized use of the portal. It will look like the picture below:
+
+![Splash Page stating "Unauthorized use is prohibited"](pics/splashpage.png)
+
+If you are an authorized administator for the system, click "To Menu" navigate to the main menu. 
+
+### Menu Page 
+
+The menu page will give you 3 options, matching the 3 tools in the overview section. 
+
+![Portal Menu Page](pics/PortalMenu.png)
+
+To chose an option, simply click it. You can always go back to the menu page with the "Back to Portal Menu" button that is at the top of each page.
+
+### Searching
+
+To search the database with either the survey response data tool or the route data tool, there are 3 types of search criteria that could be provided:
+
+#### 1: By date
+#### 2: By date range 
+#### 3: By sessionID 
+
+### Search by date
 
 #### 1: Enter in the desired search date in the "Start Date" textbox. 
 ![Start Date textbox](pics/StartDate.png)
@@ -109,9 +134,7 @@ Data is grouped by SessionID within the database.
 #### 2: Click the 'Search' button to obtain results pertaining to the entered date value.
 ![Search Button](pics/SearchButton.png)
 
-![Date Search results](pics/SearchByDate.png)
-
-#### Search by Date Range
+### Search by Date Range
 
 #### 1: Click the "Date Range" checkbox so it fills in orange. This activates the second search box. 
 ![Disabled End Date textbox](pics/EndDateNotActivated.png)
@@ -123,14 +146,79 @@ Data is grouped by SessionID within the database.
 #### 3: Click the 'Search' button to obtain results pertaining to the entered date range values.
 ![Search Button](pics/SearchButton.png)
 
-![Search results based on date range](pics/SearchByDateRangeResults.png)
-
-#### Search by SessionId (Single result table row)
+### Search by SessionId (single session result)
+Searching by sessionID is a great way to get an aggregated view of an entire session, instead of responses being listed individually. 
 
 #### 1: Enter in the desired search date in the "Start Date" textbox. 
-![Session ID search textbox](pics/SessionIdBox.png)
+![Session ID search textbox](pics/SessionIDBox.png)
 
 #### 2: Click the 'Search' button to obtain results pertaining to the entered SessionId value. 
 ![Search Button](pics/SearchButton.png)
 
-![Search results based on session ID](pics/SearchBySessionIdResults.png)
+### Viewing Results
+
+The results for both search tools are different, as they request different data values from the database. 
+
+The Survey Data Tool provides access to 2 values: 
+- Number of adults
+- Number of children
+![Survey response tool results](pics/SurveySearchResults.png)
+
+The Route Data Tool provides access to 3 tables: 
+![Route data tool results](pics/RouteSearchResults.png)
+
+#### 1: Activity Overview
+- Number of connected users
+- Number of completed routes
+- Average routes completed per user
+- Average routes completed per session
+
+#### 2: Positive Trends
+- Users started more than one route
+- Users completed more than one route
+
+#### 3: Missed Opportunities
+- Users that didn't complete a route
+- Connected users that didn't start a route
+
+### Clearing
+To reset the table and clear any search results, click the "Clear Table" button. 
+
+![Clear table button](pics/ClearTableButton.png)
+
+To reset the search boxes, whether they are date or sessionID, use the "Clear Search" button. 
+
+![Clear search button](pics/ClearSearchButton.png)
+
+### Export 
+A button to export to CSV is available in both search tools. As long as a valid search result has been returned and is visible in the table, the export button should become enabled. Clicking the button will allow for a CSV report of the current search results to be saved for archival, research, or other organizational purposes. 
+
+The export button will be disabled unless a valid response is received from the search request, as shown in the picture below.
+
+![Export button disabled](pics/ExportDisabled.png)
+
+When a valid response is received by the portal, the button becomes enabled. 
+
+![Export button](pics/ExportNotDisabled.png)
+
+## Quick Export Tool 
+
+The third and final tool in the portal is the Quick Export Tool, which allows for quick exporting of reports containing data from a timespan chosen by the user. Timespan options:
+- Last month
+- Last 3 months
+- Last 6 months
+- Last year
+- Last 3 years
+- All Time (start date Jan 1, 2020)
+
+![Reporting period options](pics/ReportTimespanOptiosn.png)
+
+The report type is also chosen by the user. Report options:
+- Survey data
+- Route Data
+
+![Data report options](pics/DataReportOptions.png)
+
+One option should be selected for both categories. Select the option by simply clicking the checkbox. When options are set to the desired report criteria, click the "Export Data" button to receive the ability to save the database results as a CSV file. 
+
+![Export Data Button](pics/ExportDataButton.png)
