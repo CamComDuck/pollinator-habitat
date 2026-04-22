@@ -16,13 +16,18 @@ You can learn more about dichotomous keys here: [biologydicionary.net](https://b
 
 ## Usage Guide: 
 
-**Note:** Let the application load completely. You will know it is ready to use when you see the prompt *Enter your session id* in the center. 
+**Note:** Let the application load completely. You will know it is ready to use when you see the Conner Prairie logo.
 
-Click the **'Enter'** Button to go to the main menu. 
+Click the **'Home'** Button to go to the main menu. 
 
-Once in the Main Menu, you should see two buttons:
+![Landing Page](pics/user_landing.png)
+
+Once in the Main Menu, you should see three buttons:
 1. Start New Pollinator Path
-2. Accessibility Settings
+2. Accessibility
+3. Pollinator Collection
+
+![Home Page](pics/user_home.png)
 
 ## Start New Pollinator Path 
 
@@ -30,65 +35,71 @@ To play the Pollinator Habitat Activity, press the 'Start New Pollinator Path' b
 
 When you see the word "Start" on your screen, you have successfully joined the activity and been assigned a secret pollinator. An example of this screen is shown in the picture below:
 
+![Home Page](pics/user_start.png)
+
 ### 1: With Start on your screen, move to the Start Card along the ground. 
 
-![Starting Screen](pics/StartScreenNew.png)
 
 ### 2: Once at the Start location, press the "Next" button to get your first pollinator clue. Then, move to the spot that matches your pollinator's clue. 
 #### You can move back a step with the "Previous" button
 
-![Directional Buttons for Previous and Next](pics/DirectionBar.png)
 
-#### Example: If your screen displays the clue "worker with no wings" move to the spot that has the "worker with no wings" marker. 
+#### Example: If your screen displays the clue "worker with no wings" move to the spot that has the "worker have no wings" marker. 
 
+![Step Page](pics/user_step.png)
 
-![Pollinator Clue example of a worker with no wings](pics/RouteImageWorkers.png)
+3: Once you arrive to the marked spot, press the "Next" button to move get your next fact so you can figure out where to go next. 
 
-### 3: Once you arrive to the marked spot, press the "Next" button to move get your next fact so you can figure out where to go next. 
+4: Follow along until you figure out your unique pollinator. You will then get to view several different facts about the pollinator. 
 
-### 4: Follow along until you figure out your unique pollinator. You will then get to view several different facts about the pollinator. 
+![Discover Page](pics/user_discover.png)
 
-### 5: Once you have reach the final fact about about your pollinator, you can either restart the activity by pressing the "Start New Route" or return to the main menu by pressing "Home'.
+5: Once you have reach the final fact about about your pollinator, you can either restart the activity by pressing the "Start New Route" or return to the main menu by pressing "Home'.
 
-### 6: When a pollinator's route is completed, it is added to the user's Collection. Total pollinators can be seen in the main menu as seen below. 
-![Collection count showing 3/11 pollinators collected](pics/CollectionCount.png)
+![Fact Page](pics/user_fact.png)
 
-### 7: Facts are then displayed for the pollinator
+6: When a pollinator's route is completed, it is added to the user's Collection. Total pollinators can be seen in the main menu. 
 
-### 8: When the final fact is displayed, the "next" button will disappear. This indicates Route conclusion. 
+8: When the final fact is displayed, the "next" button will disappear. This indicates Route conclusion. 
 
-### 9: To restart the game, press the "Start New Route" button. 
+9: To restart the game, press the "Start New Route" button. 
 
-![Screen showing last fact with start new route button](pics/RestartPrompt.png)
 
 ### If playing the activity again, start again at step 1. 
 
-### At any point in the game, the user can go back to the home menu with "Home" button. 
+At any point in the game, the user can go back to the home menu with "Home" button. 
 
 ## Accessibility Menu
 
-### Within the accessibility settings menu, there are a menu of settings that will facilitate user accessibility 
-#### From the main menu, tap "Accessibility Settings"
-#### Steps to enable:
-##### 1: Click the checkbox next to "High Color Contrast"
-- While checked, the applications visual representation will utilize high contrast colors
-- The setting can be reverted by simply unchecking the box
-##### 2: Click the checkbox next to "Text-to-Speech" 
-- While checked, the TTS button will be available to during the accessibility page. 
-- Later, this will be expanded to route page and pollinator collection page for actual usage. 
-    - Functionality to be added in future iteration. 
+Within the accessibility settings menu, there are a menu of settings that will facilitate user accessibility. From the main menu, tap "Accessibility Settings"
 
-![Accessibility Settings Page](pics/AccessibilitySettingsMenu.png)
+### Options to enable:
+1. Click the checkbox next to "High Color Contrast"
+    - While checked, the applications visual representation will utilize high contrast colors
+    - The setting can be reverted by simply unchecking the box
+2. Click the checkbox next to "Text-to-Speech" 
+    - While checked, the TTS button will be available to during the route activity
+3. Move the slider under "Text Size"
+    - When moved, the text size for all text across the application will match the selected percent, ranging from 75% - 150%
+
+![Accessibility Page](pics/user_settings.png)
+
+### Optional Survey
+The user can submit the optional survey stating the number of children and adults using the application. Submitting the survey from the same device multiple times within a 24 hour window will simply replace previous submissions with the most recent survey answers.
+
+![Survey](pics/user_survey.png)
 
 ## Pollinator Collection 
-### To access, click the "Pollinator Collection" button from the home menu. 
 ### When the user finishes a polllinator's route and gets to the fact section:
 - Pollinator is stored to users random playerId via JWT
 - The pollinator is added to the "Discovered" section of the collection page
 - The pollinator's image transforms from a silouette to a full color sprite
 - The back button takes you back the home menu
 
-![Pollinator Collection Page](pics/CollectionPage.png)
+### Replay
+- After a pollinator is discovered, it can be replayed as many times as the user wishes by clicking the "Replay" button underneath the pollinator's name
+
+![Collection Page](pics/user_collection.png)
 
 ## Pollinator Habitat Admin Portal 
 ## Overview
