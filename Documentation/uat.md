@@ -10,8 +10,11 @@
 |---------|----------|-----------|---------------------|
 |Repeatable Route Play|High|1|Y|
 |Pollinator Collection|High|3|Y|
-|Statistic Pull|High|4|Y|
-
+|Repeatable Route Play|High|4|Y|
+|High Contrast Mode|Low|3|Y|
+|Survey Data Search|High|4|Y|
+|Route Data Search|High|5|Y|
+|Quick Export Tool|High|5|Y| 
 ---
 
 # 2. Acceptance Scenarios
@@ -45,13 +48,10 @@ The user loses connection to the Wi-Fi, and the fetch route fails
 A basic error message is given to the players and redirects them to a previous page
 
 **Status:**
-Unknown if implemented ( should check )
+Implemented
+
 **Evidence:**
 
-### Scenario 3: Edge Case
-...
-
----
 
 ## Feature: Pollinator Collection Event and Page
 ### Scenario 1: Happy Path
@@ -72,7 +72,7 @@ Test file: frontend/testing/UATs/PollinatorCollection.test.tsx
 
 ### Scenario 2: Error Handling
 **Given:**
-
+User completes the route
 **When:**
 
 **Then:**
@@ -81,11 +81,7 @@ Test file: frontend/testing/UATs/PollinatorCollection.test.tsx
 
 **Evidence:**
 
-### Scenario 3: Edge Case
-...
-
----
-## Feature: One-time Survey Prompt 
+## Feature: One-time Optional Survey
 ### Scenario 1: Happy Path
 **Given:**
 User is a part of valid session
@@ -113,42 +109,98 @@ Test file: frontend/testing/UATs/OneTimeSurveyPopUp.test.tsx
 
 **Evidence:**
 
-### Scenario 3: Edge Case
-...
-
----
-
-## Feature: Read From Route Database
+## Feature: Survey Data Search Tool 
 ### Scenario 1: Happy Path
 **Given:**
-Admin service is started
+Portal service is started and accessed
 
 **When:**
-Admin accesses the service
+Proper search criteria is provided
 
 **Then:**
-Then the admin can read the files and statistics on the routes within the database
+Admin can view sessionIDs and survey responses
 
 **Status:** (Not Tested / Internal Passed / Client Accepted)
-Not Tested
+Client Accepted
 
 **Evidence:** (link to PR, test file, video, screenshot)
 
 ### Scenario 2: Error Handling
 **Given:**
+Portal service is started and accessed
 
 **When:**
+Improper search criteria is provided
 
 **Then:**
+Search button is disabled
 
 **Status:**
+Implemented
 
 **Evidence:**
 
-### Scenario 3: Edge Case
-...
+## Feature: Route Data Search Tool 
+### Scenario 1: Happy Path
+**Given:**
+Portal service is started and accessed
 
----
+**When:**
+Proper search criteria is provided
+
+**Then:**
+Admin can view aggregated route data  for criteria
+
+**Status:** (Not Tested / Internal Passed / Client Accepted)
+Internal Passed
+
+**Evidence:** (link to PR, test file, video, screenshot)
+
+### Scenario 2: Error Handling
+**Given:**
+Portal service is started and accessed
+
+**When:**
+Improper search criteria is provided
+
+**Then:**
+Search button is disabled
+
+**Status:**
+Implemented
+
+**Evidence:**
+
+## Feature: Quick Export Tool 
+### Scenario 1: Happy Path
+**Given:**
+Portal service is started and accessed
+
+**When:**
+A timeframe and report type are checked
+
+**Then:**
+Admin can quickly export reports with 3 clicks
+
+**Status:** (Not Tested / Internal Passed / Client Accepted)
+Internal Passed
+
+**Evidence:** (link to PR, test file, video, screenshot)
+
+### Scenario 2: Error Handling
+**Given:**
+Portal service is started and accessed
+
+**When:**
+Only 1 or 0 selections are made for timespan and report type
+
+**Then:**
+Export button is disabled
+
+**Status:**
+Implemented
+
+**Evidence:**
 
 # 3. Client UAT Log
 
@@ -156,14 +208,10 @@ These tests are validated by the client.
 
 | Date | Feature | Client Feedback | Action Required | Resolved (Y/N) |
 |------|---------|-----------------|-----------------|----------------|
-||Feature1||||
-
----
-
-# 4. Open Acceptance Risks
-
-## Risk1
-- Risk:
-- Mitigation Plan:
-
-## Risk2
+|03-13-2026|Repeatable Route Play|Approved for unique and random|None|Y|
+|03-13-2026|Pollinator Collection|Likes silouttes in collection page|None|Y|
+|03-13-2026|Optional survey|Wants New Route button to appear before survey|None|Y|
+|04-16-2026|High Contrast Mode|Appreciates accessibility measures|None|Y|
+|04-16-2026|Survey Data Search|Likes data search, likely won't use sessionID search|None|Y|
+|04-16-2026|Route Data Search|Needs export|Add export option|Y|
+|04-16-2026|Quick Export Tool|Would like ability to view both reports at once|Add both option for quick export page|N| 
