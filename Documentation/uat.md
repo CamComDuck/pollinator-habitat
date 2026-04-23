@@ -124,6 +124,7 @@ Admin can view sessionIDs and survey responses
 Client Accepted
 
 **Evidence:** (link to PR, test file, video, screenshot)
+Test file: portal/testing/UAT/SearchSurveyData.test.tsx
 
 ### Scenario 2: Error Handling
 **Given:**
@@ -139,6 +140,7 @@ Search button is disabled
 Implemented
 
 **Evidence:**
+Test file: portal/testing/UAT/SearchSurveyData.test.tsx
 
 ## Feature: Route Data Search Tool 
 ### Scenario 1: Happy Path
@@ -155,6 +157,8 @@ Admin can view aggregated route data  for criteria
 Internal Passed
 
 **Evidence:** (link to PR, test file, video, screenshot)
+Test file: portal/testing/UAT/SearchRouteData.test.tsx
+
 
 ### Scenario 2: Error Handling
 **Given:**
@@ -170,6 +174,7 @@ Search button is disabled
 Implemented
 
 **Evidence:**
+Test file: portal/testing/UAT/SearchRouteData.test.tsx
 
 ## Feature: Quick Export Tool 
 ### Scenario 1: Happy Path
@@ -186,6 +191,7 @@ Admin can quickly export reports with 3 clicks
 Internal Passed
 
 **Evidence:** (link to PR, test file, video, screenshot)
+Test file: portal/testing/UAT/QuickExport.test.tsx
 
 ### Scenario 2: Error Handling
 **Given:**
@@ -201,6 +207,7 @@ Export button is disabled
 Implemented
 
 **Evidence:**
+Test file: portal/testing/UAT/QuickExport.test.tsx
 
 # 3. Client UAT Log
 
