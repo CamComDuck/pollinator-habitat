@@ -6,11 +6,7 @@ This document lists known issues and improvement opportunities identified during
 
 ## Known Issues
 
-### 1. Portal Route Stats — Session ID Mode Shows Incomplete Data
-
-The Route Data Tool in the Admin Portal shows correct results when searching by **date or date range**. When searching by **Session ID**, the Activity Overview table populates correctly, but the Positive Trends and Missed Opportunities tables display zeros.
-
-The backend has 10 session-scoped route statistics endpoints fully implemented (see `ROUTE_STATS_API_REFERENCE.md` in the source code repo), but the portal's `routeDatafetchService.ts` only calls the date-range versions of those endpoints. The session-ID variants need to be wired to the corresponding fetch functions and passed into the `PositiveTrendsTable` and `MissedOpportunitiesTable` components on the Route page.
+None
 
 ---
 
@@ -26,8 +22,3 @@ Accessibility settings (high contrast, TTS, font size) are saved to `localStorag
 
 The fix is to add a small client component to `layout.tsx` that reads `localStorage['accessibilitySettings']` on mount and applies the `high-color-contrast` class, `TTS-option-switch` class, and `--font-scale` custom property to `document.documentElement` immediately — replicating what `accessibility/page.tsx` already does.
 
-### 3. Portal Route Data Tool: Wire Session-Based Stats for Trends and Missed Opportunities
-
-When the Route Data Tool searches by Session ID (`portal/src/app/route/page.tsx`, lines 88–99), only two backend calls are made (`fetchTotalRoutesCompletedBySession`, `fetchTotalConnectedUsersBySession`). The `avgRoutesPerUser` and `avgRoutesPerSession` fields are hardcoded to 0, and the Positive Trends and Missed Opportunities tables are left empty.
-
-The backend has session-scoped endpoints for all remaining metrics, but the corresponding fetch functions do not yet exist in `portal/src/services/routeDatafetchService.ts`. Adding those fetch functions and wiring them into the session-ID branch of `handleSearch` would complete the feature.
