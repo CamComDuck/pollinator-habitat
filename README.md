@@ -107,9 +107,7 @@ Detailed source code documentation organized by audience. Full index: [docs/READ
 | [Design Day](Presentations/DesignDay.pdf) | Design Day presentation |
 | [Iteration 1](Presentations/IterationDay_1.pdf) | First iteration day presentation |
 | [Iteration 2](Presentations/IterationDay_2.pdf) | Second iteration day presentation |
-| [Iteration 3](Presentations/Iteration%203%20Presentation.pptx) | Third iteration day presentation |
 | [Final Poster](Presentations/FinalPoster.pdf) | Final design day poster |
-| [Final Poster (PowerPoint)](Presentations/Final%20Poster.pptx) | Final design day poster source file |
 
 ---
 
